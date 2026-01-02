@@ -104,12 +104,12 @@ It closely simulates an industry-level CRM application and prepares students to 
 ---
 
 
-02/01/2026 (Rashmi Patil): 
+02/01/2026 (Rashmi Patil,Piyushi Agrawal,Samruddhi Athare): 
 
 ## Use Case Diagrams
 
 ### Admin Use Case
-![Admin Use Case](ReadmEPhoto/AdminUseCase.jpg)
+![Admin Use Case]![alt text](image.png)
 
 ### Telecaller Use Case
 ![Telecaller Use Case](ReadmEPhoto/Telecaller.jpg)
