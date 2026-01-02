@@ -114,7 +114,7 @@ It closely simulates an industry-level CRM application and prepares students to 
 ### Telecaller Use Case
 ![alt text](image-1.png)
 ### Telecaller Extended Use Case
-![alt text](image-2.png)
+![alt text](image-3.png)
 
 
 
