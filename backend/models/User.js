@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     enum: ["manager", "telecaller"],
     required: true,
   },
+  isApproved: {
+    type: Boolean,
+    default: false, // ❌ admin must approve
+  },
 });
 
 export default mongoose.model("User", userSchema);
