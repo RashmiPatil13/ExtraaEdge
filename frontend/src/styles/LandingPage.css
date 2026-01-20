@@ -90,12 +90,12 @@ body {
   cursor: pointer;
 }
 
-/* ================= HERO (FIXED VISIBILITY ISSUE) ================= */
+/* ================= HERO ================= */
 .hero {
   min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
-  padding: 120px 6% 80px; /* 🔥 SPACE AFTER HEADER */
+  padding: 80px 6% 40px; /* Reduced top and bottom padding */
   background: linear-gradient(180deg, #ffffff, #eef4ff);
   gap: 60px;
 }
@@ -199,7 +199,7 @@ body {
     url("https://www.transparenttextures.com/patterns/black-linen.png");
   color: white;
   padding: 24px 8% 12px;
-  margin-top: 40px;
+  margin-top: 0; /* Removed extra white space */
 }
 
 .footer-top {
@@ -261,7 +261,7 @@ body {
 
   .hero {
     min-height: auto;
-    padding: 100px 6% 60px;
+    padding: 80px 6% 30px; /* Adjusted for mobile */
     flex-direction: column;
     text-align: center;
   }
