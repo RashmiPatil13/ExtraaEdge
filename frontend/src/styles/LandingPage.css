@@ -99,6 +99,15 @@ body {
   background: linear-gradient(180deg, #ffffff, #eef4ff);
   gap: 60px;
 }
+.hero {
+  height: 100vh;
+  padding-top: 80px; /* space from top */
+  display: flex;
+  align-items: flex-start; /* content starts after padding */
+  justify-content: center;
+}
+
+
 
 .hero-content {
   flex: 1;
