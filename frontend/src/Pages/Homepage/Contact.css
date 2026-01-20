@@ -24,14 +24,14 @@
 .contact-tag {
   font-size: 12px;
   letter-spacing: 3px;
-  color: #2563eb;
+  color: #0bad67;
   font-weight: 600;
 }
 
 .contact-left h1 {
   font-size: 64px;
   font-weight: 800;
-  color: #1e3a8a;
+  color: #e5861b;
   margin: 20px 0;
   line-height: 1.1;
 }
@@ -65,19 +65,26 @@
   font-weight: 600;
 }
 
+/* ===== INPUTS WITH BLUE → BROWN OUTLINE ===== */
 .field input,
 .field textarea {
   width: 100%;
   padding: 14px 16px;
   border-radius: 12px;
-  border: 1px solid #c7d2fe;
   font-size: 14px;
-  background: #ffffff;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(90deg,  #0f766e) border-box;
+  border: 1.5px solid transparent;
+  outline: none;
 }
 
+/* ===== FOCUS EFFECT ===== */
 .field input:focus,
 .field textarea:focus {
-  border-color: #2563eb;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(90deg,  #92400e) border-box;
 }
 
 /* ===== CHECKBOX ===== */
@@ -90,7 +97,7 @@
 }
 
 .checkbox a {
-  color: #2563eb;
+  color: #d59525;
   font-weight: 500;
 }
 
