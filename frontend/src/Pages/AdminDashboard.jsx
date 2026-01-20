@@ -32,7 +32,7 @@ export default function AdminDashboard() {
           </li>
           <li>📊 Lead Reports</li>
           <li>⚙️ Settings</li>
-          {/* <li className="logout">🚪 Logout</li> */}
+          <li className="logout">🚪 Logout</li>
         </ul>
         {/* <button className="logout" onClick={logout}>
             🚪 Logout
