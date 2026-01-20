@@ -1,0 +1,103 @@
+.contact-container {
+  display: flex;
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Form Section */
+.contact-form-section {
+  flex: 1;
+  padding: 40px 40px 40px 60px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-form-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.contact-form .input-group {
+  margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 30px;
+  background: #e6f0fa;
+  font-size: 1rem;
+  color: #666;
+  outline: none;
+  transition: background 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #99aabb;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  background: #c7dbfa;
+}
+
+.contact-form textarea {
+  resize: none;
+}
+
+/* Submit Button */
+.btn-submit {
+  background-color: #00a8cc;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-submit:hover {
+  background-color: #008ea6;
+}
+
+/* Image Section */
+.contact-image-section {
+  flex: 1;
+  background: #d7e8f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.contact-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-form-section,
+  .contact-image-section {
+    padding: 30px 20px;
+  }
+}
