@@ -1,68 +1,104 @@
 .contact-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px;
-  gap: 60px;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  min-height: 80vh;
+  min-height: 100vh;
+  padding: 80px;
+  background: #fbf7ef;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.contact-form-section {
-  background: white;
-  padding: 30px 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* LEFT */
+.contact-left {
+  flex: 1;
+  padding-right: 60px;
+}
+
+.contact-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #7a4a2e;
+}
+
+.contact-left h1 {
+  font-size: 72px;
+  font-weight: 500;
+  margin: 20px 0;
+  color: #3b1f12;
+  line-height: 1.1;
+}
+
+.contact-left p {
   max-width: 400px;
-  width: 100%;
+  color: #6b4b3a;
+  font-size: 16px;
 }
 
-.contact-form-section h2 {
+/* RIGHT */
+.contact-right {
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
-  color: #333;
-  text-align: center;
 }
 
-.contact-form .input-group {
-  margin-bottom: 18px;
+.field label {
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: #3b1f12;
 }
 
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1.5px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
-  transition: border-color 0.3s ease;
+.field input,
+.field textarea {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #3b1f12;
+  background: transparent;
+  font-size: 14px;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: #007bff;
-  outline: none;
+.field textarea {
+  resize: none;
 }
 
-.btn-submit {
-  width: 100%;
-  background-color: #007bff;
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin: 20px 0;
+}
+
+.checkbox a {
+  color: #3b1f12;
+  text-decoration: underline;
+}
+
+button {
+  background: #6b3a1e;
   color: white;
-  font-size: 17px;
-  padding: 14px 0;
+  padding: 14px 30px;
+  border-radius: 14px;
   border: none;
-  border-radius: 6px;
+  font-size: 15px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
-  background-color: #0056b3;
+button:hover {
+  opacity: 0.9;
 }
 
-.contact-image-section {
-  /* Optional: style or add an image here */
-  max-width: 400px;
-  width: 100%;
-  display: none; /* hide by default, remove or adjust if you add image */
+/* ADDRESS */
+.address {
+  display: flex;
+  gap: 60px;
+  margin-top: 50px;
+  font-size: 14px;
+  color: #3b1f12;
 }
