@@ -15,7 +15,7 @@ body {
   background: white;
 }
 
-/* ================= NAVBAR (COMPACT) ================= */
+/* ================= NAVBAR ================= */
 .navbar {
   position: sticky;
   top: 0;
@@ -28,6 +28,7 @@ body {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* ================= LOGO ================= */
 .logo-section {
   display: flex;
   align-items: center;
@@ -58,6 +59,7 @@ body {
   color: var(--text-light);
 }
 
+/* ================= NAV LINKS ================= */
 .nav-links {
   display: flex;
   align-items: center;
@@ -88,12 +90,12 @@ body {
   cursor: pointer;
 }
 
-/* ================= HERO (FULL SCREEN & BIG) ================= */
+/* ================= HERO (FIXED VISIBILITY ISSUE) ================= */
 .hero {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
-  padding: 80px 6%;
+  padding: 120px 6% 80px; /* 🔥 SPACE AFTER HEADER */
   background: linear-gradient(180deg, #ffffff, #eef4ff);
   gap: 60px;
 }
@@ -106,11 +108,7 @@ body {
   font-size: 3.2rem;
   line-height: 1.15;
   color: var(--blue);
-  margin-bottom: 18px;
-}
-
-.hero-content span {
-  color: var(--blue);
+  margin: 0 0 18px;
 }
 
 .hero-content p {
@@ -195,7 +193,7 @@ body {
   margin-top: 14px;
 }
 
-/* ================= FOOTER (SMALL & CLEAN) ================= */
+/* ================= FOOTER ================= */
 .footer {
   background: #1e3a8a
     url("https://www.transparenttextures.com/patterns/black-linen.png");
@@ -263,7 +261,7 @@ body {
 
   .hero {
     min-height: auto;
-    padding: 60px 6%;
+    padding: 100px 6% 60px;
     flex-direction: column;
     text-align: center;
   }
