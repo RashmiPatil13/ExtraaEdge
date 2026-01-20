@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+// import AdminSidebar from "./AdminSidebar";
 
 import "./admin.css";
 
@@ -11,18 +12,23 @@ export default function AdminDashboard() {
   useEffect(() => {
     setShowModal(true);
   }, []);
-  // function Sidebar({ setActivePage }) {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  //   const logout = () => {
-  //     localStorage.clear();
-  //     navigate("/login");
-  //   };
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <div className="admin-layout">
+      {/* <AdminSidebar setActivePage={setActivePage} /> */}
       {/*  SIDEBAR */}
       <div className="sidebar">
-        <h2 className="logo">ExtraaEdge CRM</h2>
+        <h2 className="logo">
+          {" "}
+          <img src="images/logo.png" alt="" />
+          ExtraaEdge CRM
+        </h2>
 
         <ul>
           <li onClick={() => setActivePage("dashboard")}>🏠 Dashboard</li>
@@ -32,11 +38,10 @@ export default function AdminDashboard() {
           </li>
           <li>📊 Lead Reports</li>
           <li>⚙️ Settings</li>
-          <li className="logout">🚪 Logout</li>
-        </ul>
-        {/* <button className="logout" onClick={logout}>
+          <li className="logout" onClick={logout}>
             🚪 Logout
-          </button> */}
+          </li>
+        </ul>
       </div>
 
       {/* MAIN CONTENT */}
@@ -46,7 +51,11 @@ export default function AdminDashboard() {
           <h3>Admin Dashboard</h3>
           <div className="admin-info">
             <span>Welcome, Admin</span>
-            {/* <img src="https://i.pravatar.cc/40" alt="admin" /> */}
+            <img
+              className="admin-image"
+              src="images/admin_image.png"
+              alt="admin"
+            />
           </div>
         </div>
 
@@ -80,7 +89,7 @@ function Dashboard() {
       <div className="card">Total Leads</div>
       <div className="card">Managers</div>
       <div className="card">Telecallers</div>
-      <div className="card">Conversions</div>
+      {/* <div className="card">Conversions</div> */}
     </div>
   );
 }

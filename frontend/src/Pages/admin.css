@@ -219,3 +219,12 @@ tr {
 .actions button {
   margin-right: 8px;
 }
+h2 img {
+  height: 30px;
+  width: 30px;
+  padding-right: 10px;
+}
+.admin-image {
+  height: 30px;
+  width: 30px;
+}
