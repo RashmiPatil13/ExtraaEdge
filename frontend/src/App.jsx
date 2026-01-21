@@ -4,12 +4,14 @@ import Register from "./Pages/Registration";
 import AdminDashboard from "./Pages/AdminDashboard";
 import ManagerDashboard from "./Pages/ManagerDashboard";
 import TelecallerDashboard from "./Pages/TelecallerDashboard";
+import LandingPage from "./Pages/HomePage/Landingpage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         <Route path="/admin" element={<AdminDashboard />} />

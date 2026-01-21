@@ -16,7 +16,7 @@ export default function AdminDashboard() {
 
   const logout = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -89,7 +89,7 @@ function Dashboard() {
       <div className="card">Total Leads</div>
       <div className="card">Managers</div>
       <div className="card">Telecallers</div>
-      {/* <div className="card">Conversions</div> */}
+      <div className="card">Conversions</div>
     </div>
   );
 }
