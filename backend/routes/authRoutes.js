@@ -46,6 +46,9 @@ router.post("/login", async (req, res) => {
   if (!isMatch) {
     return res.status(400).json({ message: "Invalid password" });
   }
+  if (!user.isApproved) {
+    return res.status(403).json({ message: "Account not approved by admin" });
+  }
 
   res.json({
     message: "Login successful",
