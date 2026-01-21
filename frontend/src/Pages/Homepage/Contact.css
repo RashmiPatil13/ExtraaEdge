@@ -1,0 +1,129 @@
+/* ===== CONTACT PAGE ===== */
+.contact-page {
+  width: 100vw;
+  min-height: 100vh;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 6%;
+}
+
+/* ===== WRAPPER ===== */
+.contact-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 80px;
+}
+
+/* ===== LEFT SECTION ===== */
+.contact-left {
+  flex: 1;
+}
+
+.contact-tag {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #0bad67;
+  font-weight: 600;
+}
+
+.contact-left h1 {
+  font-size: 64px;
+  font-weight: 800;
+  color: #e5861b;
+  margin: 20px 0;
+  line-height: 1.1;
+}
+
+.contact-left p {
+  font-size: 16px;
+  color: #4b5563;
+  max-width: 420px;
+}
+
+/* ===== RIGHT SECTION ===== */
+.contact-right {
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.field label {
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* ===== INPUTS WITH BLUE → BROWN OUTLINE ===== */
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(90deg,  #0f766e) border-box;
+  border: 1.5px solid transparent;
+  outline: none;
+}
+
+/* ===== FOCUS EFFECT ===== */
+.field input:focus,
+.field textarea:focus {
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(90deg,  #92400e) border-box;
+}
+
+/* ===== CHECKBOX ===== */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin: 18px 0 30px;
+}
+
+.checkbox a {
+  color: #d59525;
+  font-weight: 500;
+}
+
+/* ===== BUTTON ===== */
+button {
+  background: #f97316;
+  color: #ffffff;
+  padding: 14px 38px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: #ea580c;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .contact-wrapper {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .contact-left h1 {
+    font-size: 48px;
+  }
+}

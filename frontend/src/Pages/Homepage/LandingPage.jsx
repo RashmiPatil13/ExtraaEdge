@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/LandingPage.css";
-import logo from "../assets/logo.png";
-import tableImg from "../assets/table.png";
+import "./LandingPage.css"; // ✅ FIXED
+import logo from "../../assets/logo.png"; // ✅ FIXED
+import tableImg from "../../assets/table.png"; // ✅ FIXED
 
 const LandingPage = () => {
   const [activeNav, setActiveNav] = useState("Home");

@@ -86,10 +86,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Public Pages
 import LandingPage from "./Pages/LandingPage";
-f41ee15baac9cc8cf2143ed4dd7bde4a856b7f
 import Login from "./Pages/Login";
 import RegisterPage from "./Pages/Registration";
-import Contact from "./Pages/Contact"; // ✅ ADD THIS
+import Contact from "./Pages/Homepage/Contact"; 
 
 // Dashboards
 import AdminDashboard from "./Pages/AdminDashboard";

@@ -41,7 +41,7 @@ body {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid #4fd1c5;
+  border-bottom: 1px solid #f9731a;
   padding: 10px 0;
   margin-bottom: 25px;
   color: white;
@@ -61,14 +61,14 @@ body {
   padding: 12px;
   border: none;
   border-radius: 30px;
-  background: linear-gradient(90deg, #00e5ff, #00bcd4);
+  background: linear-gradient(90deg, #f9731a, #00bcd4);
   color: #022b30;
   font-weight: bold;
   cursor: pointer;
 }
 
 .auth-left button:hover {
-  box-shadow: 0 0 15px #00e5ff;
+  box-shadow: 0 0 15px #f9731a;
 }
 
 .auth-left p {
@@ -77,14 +77,14 @@ body {
 }
 
 .auth-left a {
-  color: #00e5ff;
+  color: #f9731a;
   text-decoration: none;
 }
 
 /* Right */
 .auth-right {
   width: 55%;
-  background: linear-gradient(135deg, #0abdc6, #067a84);
+  background: linear-gradient(135deg, #f9731a, #1812ce);
   clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
   display: flex;
   align-items: center;
