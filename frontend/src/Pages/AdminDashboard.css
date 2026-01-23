@@ -1,3 +1,4 @@
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -5,8 +6,7 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-/* LAYOUT  */
-
+/* ===== LAYOUT ===== */
 .admin-layout {
   display: flex;
   min-height: 100vh;
@@ -14,7 +14,7 @@
   background: #f4f6fa;
 }
 
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 .sidebar {
   width: 230px;
   background: linear-gradient(180deg, #0f172a, #1e293b);
@@ -44,6 +44,7 @@
   background: #334155;
 }
 
+/* Logout button */
 .logout {
   margin-top: 30px;
   background: #dc2626;
@@ -51,15 +52,16 @@
 .logout:hover {
   background: #22c55e;
 }
-/* MAIN CONTENT  */
+
+/* ===== MAIN CONTENT ===== */
 .main-content {
   flex: 1;
-  width: calc(100vw - 230px); /* sidebar width */
+  width: calc(100vw - 230px);
   display: flex;
   flex-direction: column;
 }
 
-/*  TOP BAR  */
+/* ===== TOP BAR ===== */
 .topbar {
   background: #fff;
   padding: 15px 25px;
@@ -83,13 +85,13 @@
   border-radius: 50%;
 }
 
-/*  PAGE CONTENT  */
+/* ===== PAGE CONTENT ===== */
 .page-content {
   padding: 30px;
   width: 100%;
 }
 
-/*  DASHBOARD CARDS  */
+/* ===== DASHBOARD CARDS ===== */
 .dashboard-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -106,56 +108,71 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-/*  TABLE  */
+/* ===== TABLE ===== */
+.table-card {
+  background: white;
+  width: 100%;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
 table {
   width: 100%;
-  background: #fff;
-  border-radius: 10px;
   border-collapse: collapse;
-  margin-top: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #0f172a;
 }
 
 th,
 td {
-  padding: 14px;
+  padding: 14px 18px;
   text-align: left;
 }
 
-th {
-  background: #f1f5f9;
-  color: #0f172a;
-}
-
-tr:not(:last-child) {
+tr {
   border-bottom: 1px solid #e5e7eb;
 }
 
-/*  BUTTONS  */
+/* ===== BUTTONS (FIXED) ===== */
 button {
   padding: 7px 14px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin-right: 8px;
   font-size: 14px;
 }
 
-button:hover {
-  opacity: 0.9;
+/* ORANGE QUICK LINKS BUTTON */
+.btn-orange {
+  background: #f97316;
+  color: #fff;
+}
+.btn-orange:hover {
+  background: #ea580c;
 }
 
-button:first-child {
+/* GREEN BUTTON */
+.btn-green {
   background: #22c55e;
   color: #fff;
 }
 
-button:last-child {
+/* RED BUTTON */
+.btn-red {
   background: #ef4444;
   color: #fff;
 }
 
-/*  MODAL  */
+.actions button {
+  margin-right: 8px;
+}
+
+/* ===== MODAL ===== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -176,54 +193,19 @@ button:last-child {
   text-align: center;
 }
 
-.modal h2 {
-  margin-bottom: 10px;
-}
-
-.modal p {
-  margin-bottom: 20px;
-  color: #475569;
-}
-
 .modal button {
   background: #2563eb;
   color: #fff;
   width: 100%;
 }
-.table-card {
-  background: white;
-  width: 100%;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
 
-th {
-  background: #f8fafc;
-  font-weight: 600;
-}
-
-th,
-td {
-  padding: 14px 18px;
-  text-align: left;
-}
-
-tr {
-  border-bottom: 1px solid #e5e7eb;
-}
-.actions button {
-  margin-right: 8px;
-}
+/* ===== IMAGES ===== */
 h2 img {
   height: 30px;
   width: 30px;
   padding-right: 10px;
 }
+
 .admin-image {
   height: 20px;
   width: 30px;
