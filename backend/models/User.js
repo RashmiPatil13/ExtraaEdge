@@ -17,11 +17,12 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["admin", "manager", "telecaller"],
+    // default: "telecaller",
     required: true,
   },
   isApproved: {
     type: Boolean,
-    default: false, // ❌ admin must approve
+    default: false,
   },
 });
 

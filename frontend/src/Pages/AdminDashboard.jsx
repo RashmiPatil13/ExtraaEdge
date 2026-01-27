@@ -128,6 +128,7 @@ function ManageManagers() {
         <table>
           <thead>
             <tr>
+              <th>Name</th>
               <th>Email</th>
               <th>Status</th>
               <th>Actions</th>
@@ -137,6 +138,7 @@ function ManageManagers() {
           <tbody>
             {managers.map((m) => (
               <tr key={m._id}>
+                <td>{m.name}</td>
                 <td>{m.email}</td>
                 <td>{m.isApproved ? "Approved" : "Pending"}</td>
                 <td className="actions">
@@ -187,6 +189,7 @@ function ManageTelecallers() {
         <table>
           <thead>
             <tr>
+              <th>Name</th>
               <th>Email</th>
               <th>Status</th>
               <th>Actions</th>
@@ -196,6 +199,7 @@ function ManageTelecallers() {
           <tbody>
             {telecallers.map((t) => (
               <tr key={t._id}>
+                <td>{t.name}</td>
                 <td>{t.email}</td>
                 <td>{t.isApproved ? "Approved" : "Pending"}</td>
                 <td className="actions">
