@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Register from "./Pages/Registration";
 import AdminDashboard from "./Pages/AdminDashboard";
-import ManagerDashboard from "./Pages/ManagerDashboard";
+import ManagerDashboard from "./Pages/manager/ManagerDashboard";
 import TelecallerDashboard from "./Pages/TelecallerDashboard";
 import LandingPage from "./Pages/HomePage/Landingpage";
 

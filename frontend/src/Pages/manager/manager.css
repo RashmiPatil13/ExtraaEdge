@@ -1,0 +1,72 @@
+.admin-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: #1e293b;
+  color: #fff;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.logout {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background: #f1f5f9;
+  padding: 20px;
+  width: 200px;
+  border-radius: 8px;
+}
+select {
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.assign-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
