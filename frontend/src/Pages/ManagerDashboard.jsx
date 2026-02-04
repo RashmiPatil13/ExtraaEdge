@@ -45,13 +45,7 @@ export default function ManagerDashboard() {
 
   /* ---------- FETCH DASHBOARD STATS ---------- */
   useEffect(() => {
-    //   if (activePage === "dashboard") {
-    //     axios
-    //       .get(`http://localhost:5000/api/manager/stats/${managerId}`)
-    //       .then((res) => setStats(res.data))
-    //       .catch((err) => console.log(err));
-    //   }
-    // }, [activePage]);
+   
 
     axios.get("http://localhost:5000/api/manager/stats", {
       headers: {
@@ -102,7 +96,8 @@ export default function ManagerDashboard() {
       <div className="main-content">
         <div className="topbar">
           <h3>Manager Dashboard</h3>
-          <span>Welcome, Manager</span>
+          <span>Welcome, {localStorage.getItem("name")}</span>
+          {/* <span>Welcome, Manager</span> */}
         </div>
 
         {/* ---------- DASHBOARD ---------- */}
