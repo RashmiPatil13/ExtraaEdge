@@ -72,13 +72,6 @@ export default function ManagerDashboard() {
   const uploadExcel = async () => {
     if (!file) return alert("Please select a file");
 
-    // const formData = new FormData();
-    // formData.append("file", file);
-    // formData.append("managerId", managerId);
-
-    // await axios.post("http://localhost:5000/api/manager/upload", formData);
-
-    // alert("Leads uploaded successfully");
     const formData = new FormData();
     formData.append("file", file);
 
