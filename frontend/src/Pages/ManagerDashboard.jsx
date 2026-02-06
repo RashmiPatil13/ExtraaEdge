@@ -33,7 +33,7 @@ function Sidebar({ setActivePage }) {
   );
 }
 
-/* ---------- MAIN DASHBOARD ---------- */
+/* MAIN DASHBOARD */
 export default function ManagerDashboard() {
   const [activePage, setActivePage] = useState("dashboard");
   const [stats, setStats] = useState({});
@@ -43,7 +43,8 @@ export default function ManagerDashboard() {
 
   const managerId = localStorage.getItem("userId");
 
-  /* ---------- FETCH DASHBOARD STATS ---------- */
+  /* 
+  FETCH DASHBOARD STATS */
   useEffect(() => {
    
 
