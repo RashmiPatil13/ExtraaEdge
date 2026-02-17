@@ -1,18 +1,74 @@
-const jwt = require("jsonwebtoken");
+// import jwt from "jsonwebtoken";
 
-const protect = (roles = []) => {
+// export const authMiddleware = (roles = []) => {
+//   return (req, res, next) => {
+//     try {
+//       const token = req.headers.authorization?.split(" ")[1];
+//       if (!token) {
+//         return res.status(401).json({ msg: "No token provided" });
+//       }
+
+//       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+//       if (roles.length && !roles.includes(decoded.role)) {
+//         return res.status(403).json({ msg: "Access denied" });
+//       }
+
+//       req.user = decoded;
+//       next();
+//     } catch (error) {
+//       console.error("Auth error:", error.message);
+//       return res.status(401).json({ msg: "Invalid token" });
+//     }
+//   };
+// };
+// export default authMiddleware;
+
+// import jwt from "jsonwebtoken";
+
+// const authMiddleware = (roles = []) => {
+//   return (req, res, next) => {
+//     try {
+//       const token = req.headers.authorization?.split(" ")[1];
+//       if (!token) return res.status(401).json({ msg: "No token" });
+
+//       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+//       if (roles.length && !roles.includes(decoded.role)) {
+//         return res.status(403).json({ msg: "Access denied" });
+//       }
+
+//       req.user = decoded;
+//       next();
+//     } catch (err) {
+//       return res.status(401).json({ msg: "Invalid token" });
+//     }
+//   };
+// };
+
+// export default authMiddleware;
+
+import jwt from "jsonwebtoken";
+
+export const authMiddleware = (roles = []) => {
   return (req, res, next) => {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) return res.status(401).json({ message: "No token" });
+    try {
+      const token = req.headers.authorization?.split(" ")[1];
 
-    const decoded = jwt.verify(token, "SECRET_KEY");
+      if (!token) {
+        return res.status(401).json({ msg: "No token provided" });
+      }
 
-    if (roles.length && !roles.includes(decoded.role))
-      return res.status(403).json({ message: "Access denied" });
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = decoded;
-    next();
+      if (roles.length && !roles.includes(decoded.role)) {
+        return res.status(403).json({ msg: "Access denied" });
+      }
+
+      req.user = decoded;
+      next();
+    } catch (error) {
+      return res.status(401).json({ msg: "Invalid token" });
+    }
   };
 };
-
-module.exports = protect;
