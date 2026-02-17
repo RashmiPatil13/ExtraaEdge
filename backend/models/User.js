@@ -16,8 +16,17 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["manager", "telecaller"],
+    enum: ["admin", "manager", "telecaller"],
+    default: "telecaller",
     required: true,
+  },
+  isApproved: {
+    type: Boolean,
+    default: false,
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 
