@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../manager/manager.css";
-import api from "../utils/api";
+import api from "../../utils/api";
 
 export default function AssignLeads() {
   const [leads, setLeads] = useState([]);

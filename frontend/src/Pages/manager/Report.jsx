@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import api from "../utils/api";
+import api from "../../utils/api";
 
 export default function Report() {
   const [data, setData] = useState([]);

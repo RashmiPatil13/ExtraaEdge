@@ -7,16 +7,15 @@ import Login from "./Pages/Login";
 import RegisterPage from "./Pages/Registration";
 import Contact from "./Pages/Homepage/Contact";
 
-// ---------- ADMIN / MANAGER / TELECALLER ----------
+// ---------- ADMIN / TELECALLER ----------
 import AdminDashboard from "./Pages/AdminDashboard";
-// import ManagerDashboard from "./Pages/Homepage/ManagerDashboard";
 import TelecallerDashboard from "./Pages/Telecaller/TelecallerDashboard";
 
-// ---------- MANAGER PAGES ----------
-// import Sidebar from "./Pages/Telecaller/Sidebar";
-// // import Dashboard from "./pages/Homepage/ManagerDashboard";
-// import Leads from "./pages/Telecaller/Leads";
-// import Reports from "./pages/Telecaller/Reports";
+// ---------- MANAGER ----------
+import Sidebar from "./Pages/manager/Sidebar";
+import Dashboard from "./Pages/manager/Dashboard";
+import Leads from "./Pages/manager/AssignLeads";
+import Reports from "./Pages/manager/Report";
 
 import "./App.css";
 
@@ -49,19 +48,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* ---------- PUBLIC ROUTES ---------- */}
+        {/* PUBLIC */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/contact" element={<Contact />} />
 
-        {/* ---------- ADMIN ---------- */}
+        {/* ADMIN */}
         <Route path="/admin" element={<AdminDashboard />} />
 
-        {/* ---------- MANAGER ---------- */}
+        {/* MANAGER */}
         <Route path="/manager/*" element={<ManagerLayout />} />
 
-        {/* ---------- TELECALLER ---------- */}
+        {/* TELECALLER */}
         <Route path="/telecaller" element={<TelecallerLayout />} />
       </Routes>
     </BrowserRouter>
