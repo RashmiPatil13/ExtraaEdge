@@ -1,0 +1,231 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background: #1f2937;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.3s;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sidebar ul li:hover {
+  background: #374151;
+}
+
+/* ACTIVE MENU */
+.sidebar ul li.active {
+  background: #2563eb;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.main-content {
+  flex: 1;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  background: #f1f5f9;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.topbar {
+  background: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  width: 180px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* LEADS TABLE */
+.leads-section {
+  padding: 20px;
+}
+
+.leads-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: white;
+}
+
+.leads-table th,
+.leads-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+/* MOBILE RESPONSIVE */
+.mobile-menu {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .stats-container {
+    justify-content: center;
+  }
+}
+.chart-box {
+  background: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 
+-------------------------------------------------------------------------
+.telecaller-container {
+  display: flex;
+}
+
+.telecaller-sidebar {
+  width: 250px;
+  background: #2d3e50;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}
+
+.telecaller-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.telecaller-sidebar li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.logout-btn {
+  color: red;
+  margin-top: 20px;
+}
+
+.telecaller-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.telecaller-topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.telecaller-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-card {
+  background: #f4f6f9;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  width: 160px;
+}
+
+.lead-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.lead-table th,
+.lead-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.update-btn {
+  background: green;
+  color: white;
+  padding: 5px 10px;
+} */
