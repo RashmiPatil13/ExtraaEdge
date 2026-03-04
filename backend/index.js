@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/admin.js";
 import managerRoutes from "./routes/managerRoutes.js";
 import telecallerRoutes from "./routes/telecallerRoutes.js";
+
 import path from "path";
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/manager", managerRoutes);
 app.use("/api/telecaller", telecallerRoutes);
 app.use("/uploads", express.static("uploads"));
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
@@ -26,16 +28,3 @@ mongoose
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
-
-// const express = require("express");
-// const app = express();
-
-// app.use(express.json());
-
-// app.use("/api/admin", require("./routes/adminRoutes"));
-// app.use("/api/manager", require("./routes/managerRoutes")); // ✅ REQUIRED
-// app.use("/api/telecaller", require("./routes/telecallerRoutes"));
-
-// app.listen(5000, () => {
-//   console.log("Server running on port 5000");
-// });

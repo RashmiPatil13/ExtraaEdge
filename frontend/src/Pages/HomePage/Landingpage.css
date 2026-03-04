@@ -6,6 +6,10 @@
 }
 
 /* ================= BASE ================= */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
 }
@@ -24,20 +28,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 6%;
+  padding: 12px 6%;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* ================= LOGO (BLENDED / BLUR) ================= */
+/* ================= LOGO ================= */
 .logo-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logo-box {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   position: relative;
   display: flex;
   align-items: center;
@@ -55,7 +59,6 @@ body {
   );
   filter: blur(12px);
   border-radius: 50%;
-  z-index: 0;
 }
 
 .logo-box img {
@@ -64,50 +67,78 @@ body {
   object-fit: contain;
   position: relative;
   z-index: 1;
-  background: transparent;
+}
+
+.logo-text h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--blue);
+}
+
+.logo-text p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--text-light);
 }
 
 /* ================= NAV LINKS ================= */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 18px;
 }
 
 .nav-btn {
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 13px;
-  padding: 4px 8px;
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 6px;
   color: var(--text-dark);
+  transition: all 0.3s ease;
 }
 
+/* Hover */
+.nav-btn:hover {
+  color: var(--orange);
+}
+
+/* Active (Orange only when clicked) */
 .nav-btn.active {
-  color: var(--blue);
+  background: var(--orange);
+  color: white;
   font-weight: 600;
 }
 
+/* ================= LOGIN BUTTON ================= */
 .btn-get-started-nav {
+  background: transparent;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-get-started-nav:hover {
   background: var(--orange);
   color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
 }
 
 /* ================= HERO ================= */
 .hero {
-  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 80px 6% 40px;
+  justify-content: space-between;
+  padding: 120px 6% 80px;
   background: linear-gradient(180deg, #ffffff, #eef4ff);
-  gap: 60px;
-  margin-top: 800px;
+  gap: 100px;
+  margin-top: 430px;
 }
 
 /* ================= HERO CONTENT ================= */
@@ -116,14 +147,14 @@ body {
 }
 
 .hero-content h2 {
-  font-size: 3.2rem;
+  font-size: 3rem;
   line-height: 1.15;
   color: var(--blue);
   margin: 0 0 18px;
 }
 
 .hero-content p {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--text-light);
   max-width: 560px;
 }
@@ -138,10 +169,11 @@ body {
 .btn-secondary {
   padding: 14px 34px;
   border-radius: 10px;
-  font-size: 1.05rem;
+  font-size: 1rem;
   border: none;
   cursor: pointer;
   font-weight: 600;
+  transition: 0.3s ease;
 }
 
 .btn-primary {
@@ -149,12 +181,20 @@ body {
   color: white;
 }
 
+.btn-primary:hover {
+  background: #162f6b;
+}
+
 .btn-secondary {
   background: var(--orange);
   color: white;
 }
 
-/* ================= HERO IMAGE (IMAGE ONLY) ================= */
+.btn-secondary:hover {
+  background: #cf6f1f;
+}
+
+/* ================= HERO IMAGE ================= */
 .hero-image {
   flex: 1;
   display: flex;
@@ -162,86 +202,7 @@ body {
   align-items: center;
 }
 
-.hero-table-image {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* ================= FOOTER ================= */
-.footer {
-  background: #1e3a8a
-    url("https://www.transparenttextures.com/patterns/black-linen.png");
-  color: white;
-  padding: 24px 8% 12px;
-}
-
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.footer-col h4 {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-col li {
-  margin-bottom: 4px;
-}
-
-.footer-link {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 13px;
-  opacity: 0.75;
-  cursor: pointer;
-}
-
-.footer-link.active {
-  color: var(--orange);
-  opacity: 1;
-}
-
-.footer-bottom {
-  margin-top: 16px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  text-align: center;
-  font-size: 12px;
-  opacity: 0.65;
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-content h2 {
-    font-size: 2.1rem;
-  }
-
-  .footer-top {
-    flex-direction: column;
-    text-align: center;
-    gap: 16px;
-  }
-}
-/* ================= KEY FEATURES ================= */
+/* ================= FEATURES ================= */
 .features {
   padding: 80px 6%;
   background: #f8fafc;
@@ -249,7 +210,7 @@ body {
 }
 
 .features-title {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: var(--blue);
   margin-bottom: 10px;
 }
@@ -257,7 +218,6 @@ body {
 .features-subtitle {
   color: var(--text-light);
   margin-bottom: 50px;
-  font-size: 1rem;
 }
 
 .features-grid {
@@ -279,9 +239,9 @@ body {
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.1);
 }
 
-.feature-card img {
-  width: 64px;
-  height: 64px;
+.feature-icon {
+  font-size: 42px;
+  color: var(--orange);
   margin-bottom: 16px;
 }
 
@@ -296,10 +256,53 @@ body {
   color: var(--text-light);
 }
 
-/* ================= RESPONSIVE FEATURES ================= */
+/* ================= FOOTER ================= */
+.footer {
+  background: #1e3a8a;
+  color: white;
+  padding: 24px 8% 12px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-bottom {
+  margin-top: 16px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 992px) {
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content h2 {
+    font-size: 2rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
   }
 }
 

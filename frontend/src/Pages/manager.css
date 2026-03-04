@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -164,7 +164,7 @@ tbody tr:hover {
   font-size: 22px;
 }
 
-/*  RESPONSIVE  */
+
 @media (max-width: 768px) {
   .sidebar {
     width: 200px;
@@ -173,4 +173,4 @@ tbody tr:hover {
   .cards {
     grid-template-columns: 1fr;
   }
-}
+} */

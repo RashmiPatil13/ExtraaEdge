@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./auth.css";
+import api from "./utils/api";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -11,23 +12,21 @@ export default function Login() {
 
   const login = async () => {
     try {
-      if (email === "admin@gmail.com" && password === "12345678") {
+      const res = await api.post("/auth/login", { email, password });
+      console.log("LOGIN RESPONSE:", res.data);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.role);
+      localStorage.setItem("name", res.data.name);
+
+      if (res.data.role === "admin") {
         navigate("/admin");
-        return;
+      } else if (res.data.role === "manager") {
+        navigate("/manager");
+      } else {
+        navigate("/telecaller");
       }
-
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
-
-      const role = res.data.role;
-
-      if (role === "manager") navigate("/manager");
-      if (role === "telecaller") navigate("/telecaller");
     } catch (err) {
-      // alert(err.response.data.message);
-      alert(err.response?.data?.message || "Login failed");
+      alert(err.response?.data?.message || "Login Failed");
     }
   };
 
@@ -35,21 +34,17 @@ export default function Login() {
     <div className="auth-container">
       <div className="auth-left">
         <h2>Login to your account</h2>
-
         <input
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
-
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-
         <button onClick={login}>Login</button>
-
         <p>
           Don’t have an account? <Link to="/register">Sign Up</Link>
         </p>

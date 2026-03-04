@@ -1,3 +1,4 @@
+console.log("Login API Hit:", req.body);
 const User = require("../models/User");
 
 exports.register = async (req, res) => {
@@ -15,23 +16,64 @@ exports.register = async (req, res) => {
   res.status(201).json({ message: "User registered successfully" });
 };
 
-const User = require("../models/User");
+// const User = require("../models/User");
+// const jwt = require("jsonwebtoken");
+
+// exports.login = async (req, res) => {
+//   console.log("REQ BODY:", req.body);
+
+//   try {
+//     const { email, password } = req.body;
+
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(400).json({ message: "User not found" });
+
+//     if (user.password !== password)
+//       return res.status(400).json({ message: "Invalid password" });
+
+//     // 🔥 GENERATE TOKEN HERE
+//     const token = jwt.sign(
+//       {
+//         id: user._id,
+//         role: user.role,
+//       },
+//       process.env.JWT_SECRET || "secretkey",
+//       { expiresIn: "1d" }
+//     );
+
+//     res.status(200).json({
+//       message: "Login successful",
+//       token: token, // send token separately
+//       user: {
+//         role: user.role,
+//         name: user.name,
+//         email: user.email,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
 exports.login = async (req, res) => {
-  console.log("REQ BODY:", req.body);
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
+
     if (!user) return res.status(400).json({ message: "User not found" });
 
     if (user.password !== password)
       return res.status(400).json({ message: "Invalid password" });
 
+    // For now simple token (you can later use JWT)
+    const token = "dummy-token-" + user._id;
+
     res.status(200).json({
       message: "Login successful",
+      token: token,
       user: {
-        id: user._id,
         role: user.role,
+        name: user.name,
       },
     });
   } catch (error) {
@@ -39,43 +81,25 @@ exports.login = async (req, res) => {
   }
 };
 
-// export const login = async (req, res) => {
-//   const { email, password, role } = req.body;
-
-//   // TEMP CHECK (for testing)
-//   if (!email || !password || !role) {
-//     return res.status(400).json({ message: "Missing fields" });
-//   }
-
-//   res.json({
-//     message: "Login successful",
-//     role: role,
-//   });
-// };
-
-// exports.register = async (req, res) => {
+// const User = require("../models/User");
+// exports.login = async (req, res) => {
+//   console.log("REQ BODY:", req.body);
 //   try {
-//     const { name, email, password, role } = req.body;
+//     const { email, password } = req.body;
 
-//     const userExists = await User.findOne({ email });
-//     if (userExists) {
-//       return res.status(400).json({ message: "User already exists" });
-//     }
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(400).json({ message: "User not found" });
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
+//     if (user.password !== password)
+//       return res.status(400).json({ message: "Invalid password" });
 
-//     const user = await User.create({
-//       name,
-//       email,
-//       password: hashedPassword,
-//       role,
-//     });
+//     res.status(200).json({
+//       message: "Login successful",
+//       user: {
 
-//     res.status(201).json({
-//       message: "User registered successfully",
-//       user,
+//       },
 //     });
 //   } catch (error) {
-//     res.status(500).json({ message: error.message });
+//     res.status(500).json({ message: "Server error" });
 //   }
 // };

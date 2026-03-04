@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../manager/manager.css";
+import api from "../utils/api";
 
 export default function AssignLeads() {
   const [leads, setLeads] = useState([]);
@@ -8,28 +9,18 @@ export default function AssignLeads() {
   const [selectedLeads, setSelectedLeads] = useState([]);
   const [telecallerId, setTelecallerId] = useState("");
 
-  /* Fetch unassigned leads */
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/manager/unassigned-leads", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    api
+      .get("/manager/unassigned-leads")
       .then((res) => setLeads(res.data))
-      .catch(console.log);
+      .catch((err) => console.log(err));
   }, []);
 
-  /* Fetch telecallers */
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/manager/telecallers", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    api
+      .get("/manager/telecallers")
       .then((res) => setTelecallers(res.data))
-      .catch(console.log);
+      .catch((err) => console.log(err));
   }, []);
 
   /* Checkbox handler */
@@ -46,12 +37,13 @@ export default function AssignLeads() {
       return;
     }
 
-    await axios.post(
-      "http://localhost:5000/api/manager/assign",
+    await api.post(
+      "/manager/assign",
       {
         leadIds: selectedLeads,
         telecallerId,
       },
+
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -68,10 +60,10 @@ export default function AssignLeads() {
 
   return (
     <div>
-      <h2>Assign Leads</h2>
-
+      <h2 style={{ margin: "20px" }}>Assign Leads</h2>
       {/* Telecaller Dropdown */}
       <select
+        className="dropdown"
         value={telecallerId}
         onChange={(e) => setTelecallerId(e.target.value)}
       >
@@ -82,7 +74,6 @@ export default function AssignLeads() {
           </option>
         ))}
       </select>
-
       {/* Leads Table */}
       <table>
         <thead>
@@ -112,7 +103,6 @@ export default function AssignLeads() {
           ))}
         </tbody>
       </table>
-
       <button className="assign-btn" onClick={assignLeads}>
         Assign Selected Leads
       </button>

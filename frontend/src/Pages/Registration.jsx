@@ -16,7 +16,7 @@ export default function Register() {
     try {
       await axios.post("http://localhost:5000/api/auth/register", form);
       alert("Registered Successfully");
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       alert(err.response.data.message);
     }
@@ -60,9 +60,9 @@ export default function Register() {
 
       <div className="auth-right">
         <div>
-          <h1>ExtraaEdge CRM</h1>
-          {/* <p>Create your account to continue</p> */}
-          <p>Register to access CRM</p>
+          <h1>WELCOME!</h1>
+          <h2>ExtraaEdge CRM</h2>
+          <p>Create your account to continue</p>
         </div>
       </div>
     </div>
