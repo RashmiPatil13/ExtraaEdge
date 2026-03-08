@@ -299,9 +299,12 @@
 // }
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "./utils/api";
+import api from "../utils/api";
 import LeadReports from "./LeadReports";
+import Settings from "./Settings";
 import { FaUsers, FaUserTie, FaPhoneAlt, FaCheckCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 import {
   LineChart,
@@ -339,7 +342,9 @@ export default function AdminDashboard() {
     const role = localStorage.getItem("role");
 
     if (role !== "admin") {
-      alert("Access Denied: Admins Only");
+      // alert("Access Denied: Admins Only");
+      toast.error("Access Denied: Admins Only!");
+
       navigate("/login");
     }
   }, []);
@@ -368,7 +373,7 @@ export default function AdminDashboard() {
   return (
     <div className="admin-layout">
       {/* SIDEBAR */}
-      <div className="sidebar">
+      <div className="adminsidebar">
         <h2 className="logo">
           <img src="images/logo.png" alt="" />
           ExtraaEdge CRM
@@ -381,7 +386,7 @@ export default function AdminDashboard() {
             📞 Manage Telecallers
           </li>
           <li onClick={() => setActivePage("leadReports")}>📊 Lead Reports</li>
-          <li>⚙️ Settings</li>
+          <li onClick={() => setActivePage("settings")}>⚙️ Settings</li>
           <li className="logout" onClick={logout}>
             🚪 Logout
           </li>
@@ -412,6 +417,7 @@ export default function AdminDashboard() {
           {activePage === "managers" && <ManageManagers />}
           {activePage === "telecallers" && <ManageTelecallers />}
           {activePage === "leadReports" && <LeadReports />}
+          {activePage === "settings" && <Settings />}
         </div>
       </div>
 
@@ -575,28 +581,71 @@ function ManageManagers() {
       setManagers(res.data.filter((u) => u.role === "manager"));
     } catch (error) {
       console.log(error);
-      alert("Failed to load managers");
+      // alert("Failed to load managers");
+      toast.error("Failed to load managers!");
     }
   };
 
-  const approveUser = async (id) => {
+  // const approveUser = async (id) => {
+  //   try {
+  //     await api.put(`/admin/approve/${id}`);
+  //     fetchManagers();
+  //   } catch (error) {
+  //     alert("Approval failed");
+  //   }
+  // };
+
+  // const disapproveUser = async (id) => {
+  //   try {
+  //     await api.put(`/admin/disapprove/${id}`);
+  //     fetchManagers();
+  //   } catch (error) {
+  //     alert("Disapprove failed");
+  //   }
+  // };
+  const toggleApproval = async (id) => {
     try {
-      await api.put(`/admin/approve/${id}`);
+      await api.put(`/admin/toggle-approval/${id}`);
       fetchManagers();
     } catch (error) {
-      alert("Approval failed");
+      // alert("Action failed");
+      toast.error("Action failed!");
     }
   };
 
+  // const deleteUser = async (id) => {
+
+  //     if (window.confirm("Delete this manager?")) {
+  //     try {
+  //       await api.delete(`/admin/delete/${id}`);
+  //       fetchManagers();
+  //     } catch (error) {
+  //       // alert("Delete failed");
+  //       toast.error("Delete failed!");
+  //     }
+  //   }
+  // };
   const deleteUser = async (id) => {
-    if (window.confirm("Delete this manager?")) {
-      try {
-        await api.delete(`/admin/delete/${id}`);
-        fetchManagers();
-      } catch (error) {
-        alert("Delete failed");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This manager will be deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff4d4d",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await api.delete(`/admin/delete/${id}`);
+          fetchManagers();
+
+          Swal.fire("Deleted!", "Manager has been deleted.", "success");
+        } catch (error) {
+          Swal.fire("Error!", "Delete failed.", "error");
+        }
       }
-    }
+    });
   };
 
   return (
@@ -621,20 +670,54 @@ function ManageManagers() {
                 <td>{m.email}</td>
                 <td>{m.isApproved ? "Approved" : "Pending"}</td>
                 <td className="actions">
-                  {!m.isApproved && (
+                  {/* {!m.isApproved && (
                     <button
                       className="approve-btn"
                       onClick={() => approveUser(m._id)}
                     >
                       Approve
                     </button>
-                  )}
-                  <button
+                  )} */}
+                  {/* {m.isApproved ? (
+                    <button
+                      className="disapprove-btn"
+                      onClick={() => disapproveUser(m._id)}
+                    >
+                      Disapprove
+                    </button>
+                  ) : (
+                    <button
+                      className="approve-btn"
+                      onClick={() => approveUser(m._id)}
+                    >
+                      Approve
+                    </button>
+                  )} */}
+
+                  <td className="actions">
+                    <button
+                      className={`toggle-btn ${
+                        m.isApproved ? "approved" : "pending"
+                      }`}
+                      onClick={() => toggleApproval(m._id)}
+                    >
+                      {m.isApproved ? "Disapprove" : "Approve"}
+                    </button>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteUser(m._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+
+                  {/* <button
                     className="delete-btn"
                     onClick={() => deleteUser(m._id)}
                   >
                     Delete
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}
@@ -660,28 +743,61 @@ function ManageTelecallers() {
       setTelecallers(res.data.filter((u) => u.role === "telecaller"));
     } catch (error) {
       console.log(error);
-      alert("Failed to load telecallers");
+      // alert("Failed to load telecallers");
+      toast.error("Failed to load telecallers");
     }
   };
 
-  const approveUser = async (id) => {
+  // const approveUser = async (id) => {
+  //   try {
+  //     await api.put(`/admin/approve/${id}`);
+  //     fetchTelecallers();
+  //   } catch (error) {
+  //     alert("Approval failed");
+  //   }
+  // };
+  const toggleApproval = async (id) => {
     try {
-      await api.put(`/admin/approve/${id}`);
+      await api.put(`/admin/toggle-approval/${id}`);
       fetchTelecallers();
     } catch (error) {
-      alert("Approval failed");
+      // alert("Action failed");
+      toast.error("Action failed..!");
     }
   };
 
+  // const deleteUser = async (id) => {
+  //   if (window.confirm("Delete this telecaller?")) {
+  //     try {
+  //       await api.delete(`/admin/delete/${id}`);
+  //       fetchTelecallers();
+  //     } catch (error) {
+  //       alert("Delete failed");
+  //     }
+  //   }
+  // };
+
   const deleteUser = async (id) => {
-    if (window.confirm("Delete this telecaller?")) {
-      try {
-        await api.delete(`/admin/delete/${id}`);
-        fetchTelecallers();
-      } catch (error) {
-        alert("Delete failed");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This Telecaller will be deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff4d4d",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await api.delete(`/admin/delete/${id}`);
+          fetchTelecallers();
+
+          Swal.fire("Deleted!", "Telecaller has been deleted.", "success");
+        } catch (error) {
+          Swal.fire("Error!", "Delete failed.", "error");
+        }
       }
-    }
+    });
   };
 
   return (
@@ -706,10 +822,27 @@ function ManageTelecallers() {
                 <td>{t.email}</td>
                 <td>{t.isApproved ? "Approved" : "Pending"}</td>
                 <td className="actions">
-                  {!t.isApproved && (
+                  {/* {!t.isApproved && (
                     <button onClick={() => approveUser(t._id)}>Approve</button>
                   )}
-                  <button onClick={() => deleteUser(t._id)}>Delete</button>
+                  <button onClick={() => deleteUser(t._id)}>Delete</button> */}
+                  <td className="actions">
+                    <button
+                      className={`toggle-btn ${
+                        t.isApproved ? "approved" : "pending"
+                      }`}
+                      onClick={() => toggleApproval(t._id)}
+                    >
+                      {t.isApproved ? "Disapprove" : "Approve"}
+                    </button>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteUser(t._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </td>
               </tr>
             ))}
@@ -719,51 +852,3 @@ function ManageTelecallers() {
     </div>
   );
 }
-//  * ___LeadReports ________*
-// function LeadReports() {
-//   const [leads, setLeads] = useState([]);
-
-//   useEffect(() => {
-//     fetchLeads();
-//   }, []);
-
-//   const fetchLeads = async () => {
-//     try {
-//       const res = await api.get("/manager/leads");
-//       setLeads(res.data);
-//     } catch (error) {
-//       console.log(error);
-//       alert("Failed to fetch leads");
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h2>Lead Reports</h2>
-
-//       <div className="table-card">
-//         <table>
-//           <thead>
-//             <tr>
-//               <th>Name</th>
-//               <th>Mobile</th>
-//               <th>Status</th>
-//               <th>Assigned To</th>
-//             </tr>
-//           </thead>
-
-//           <tbody>
-//             {leads.map((l) => (
-//               <tr key={l._id}>
-//                 <td>{l.name}</td>
-//                 <td>{l.mobile}</td>
-//                 <td>{l.status}</td>
-//                 <td>{l.assignedTo?.name || "Unassigned"}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// }

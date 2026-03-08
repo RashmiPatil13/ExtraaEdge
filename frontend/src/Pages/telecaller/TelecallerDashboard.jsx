@@ -52,6 +52,21 @@ const TelecallerDashboard = () => {
     localStorage.clear();
     navigate("/");
   };
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  const fetchNotifications = async () => {
+    try {
+      const res = await api.get("/user/notifications");
+
+      res.data.forEach((n) => {
+        toast.info(n.message);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="dashboard-container">
@@ -97,41 +112,10 @@ const TelecallerDashboard = () => {
           </span>
 
           <h3>Telecaller Dashboard</h3>
-          {/* <span>Welcome, {localStorage.getItem("name")}</span> */}
+
           <span>Welcome, {username || "User"}</span>
         </div>
 
-        {/* {activePage === "dashboard" && (
-          <>
-            <div className="stats-container">
-              <div className="card">
-                <h3>Total Leads</h3>
-                <p>{stats.total}</p>
-              </div>
-
-              <div className="card">
-                <h3>Follow Ups</h3>
-                <p>{stats.followups}</p>
-              </div>
-
-              <div className="card">
-                <h3>Callbacks</h3>
-                <p>{stats.callbacks}</p>
-              </div>
-
-              <div className="card">
-                <h3>Converted</h3>
-                <p>{stats.converted}</p>
-              </div>
-
-              <div className="card">
-                <h3>Cold Leads</h3>
-                <p>{stats.cold}</p>
-              </div>
-            </div>
-
-            <TelecallerChart />
-          </> */}
         {activePage === "dashboard" && (
           <>
             <div className="manager-stats">
@@ -142,7 +126,6 @@ const TelecallerDashboard = () => {
                 <h4>Total Leads</h4>
                 <p>{stats.total}</p>
               </div>
-
               <div className="manager-card">
                 <div className="icon followup-icon">
                   <FaRedo />
@@ -150,15 +133,13 @@ const TelecallerDashboard = () => {
                 <h4>Follow Ups</h4>
                 <p>{stats.followups}</p>
               </div>
-
               <div className="manager-card">
                 <div className="icon callback-icon">
                   <FaPhone />
                 </div>
                 <h4>Callbacks</h4>
                 <p>{stats.callbacks}</p>
-              </div>
-
+              </div>{" "}
               <div className="manager-card">
                 <div className="icon converted-icon">
                   <FaCheckCircle />
@@ -166,7 +147,7 @@ const TelecallerDashboard = () => {
                 <h4>Converted</h4>
                 <p>{stats.converted}</p>
               </div>
-
+              <br></br>
               <div className="manager-card">
                 <div className="icon cold-icon">
                   <FaSnowflake />
@@ -178,6 +159,7 @@ const TelecallerDashboard = () => {
 
             <div className="chart-box">
               <TelecallerChart />
+              {/* <TelecallerDailyBarChart /> */}
             </div>
           </>
         )}

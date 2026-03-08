@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../utils/api";
+import Select from "react-select";
 
 export default function MyLeads() {
   const [leads, setLeads] = useState([]);
@@ -20,30 +21,6 @@ export default function MyLeads() {
     fetchLeads();
   }, []);
 
-  // const updateLead = async (id, status, remarks, followUpDate) => {
-  //   await api.put(`/lead/${id}`, {
-  //     // await api.put(`/telecaller/update-lead/${id}`, {
-  //     status,
-  //     remarks,
-  //     followUpDate,
-  //   });
-
-  //   alert("Lead Updated");
-  // };
-  // const updateLead = async (id, status, remarks, followUpDate) => {
-  //   try {
-  //     await api.put(`/lead/${id}`, {
-  //       status,
-  //       remarks,
-  //       followUpDate,
-  //     });
-
-  //     alert("Lead Updated");
-  //   } catch (error) {
-  //     console.log("Update Error:", error);
-  //     alert("Update Failed");
-  //   }
-  // };
   const updateLead = async (id, status, remarks, followUpDate) => {
     try {
       const res = await api.put(`/telecaller/lead/${id}`, {
@@ -57,6 +34,20 @@ export default function MyLeads() {
       console.log("Error:", error.response?.data);
       alert("Update Failed");
     }
+  };
+  const remarkOptions = [
+    { value: "Not Interested", label: "Not Interested" },
+    { value: "Call Tomorrow", label: "Call Tomorrow" },
+    { value: "Call Later", label: "Call Later" },
+    { value: "Student Busy", label: "Student Busy" },
+    { value: "Wrong Number", label: "Wrong Number" },
+    { value: "Interested", label: "Interested" },
+  ];
+
+  const handleChange = (id, field, value) => {
+    setLeads((prev) =>
+      prev.map((lead) => (lead._id === id ? { ...lead, [field]: value } : lead))
+    );
   };
 
   return (
@@ -83,6 +74,7 @@ export default function MyLeads() {
 
               <td>
                 <select id={`status-${lead._id}`} defaultValue={lead.status}>
+                  <option value="pending">Pending</option>
                   <option value="followup">Follow Up</option>
                   <option value="callback">Callback</option>
                   <option value="converted">Converted</option>
@@ -90,8 +82,19 @@ export default function MyLeads() {
                 </select>
               </td>
 
-              <td>
-                <input id={`remarks-${lead._id}`} defaultValue={lead.remarks} />
+              {/* <input id={`remarks-${lead._id}`} defaultValue={lead.remarks} /> */}
+              <td style={{ width: "220px" }}>
+                <Select
+                  options={remarkOptions}
+                  value={remarkOptions.find(
+                    (opt) => opt.value === lead.remarks
+                  )}
+                  onChange={(selected) =>
+                    handleChange(lead._id, "remarks", selected.value)
+                  }
+                  isSearchable
+                  placeholder="Select remark"
+                />
               </td>
 
               <td>
@@ -104,7 +107,8 @@ export default function MyLeads() {
                     updateLead(
                       lead._id,
                       document.getElementById(`status-${lead._id}`).value,
-                      document.getElementById(`remarks-${lead._id}`).value,
+                      // document.getElementById(`remarks-${lead._id}`).value,
+                      lead.remarks,
                       document.getElementById(`date-${lead._id}`).value
                     )
                   }

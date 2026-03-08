@@ -43,7 +43,8 @@ import { useEffect, useState } from "react";
 import api from "../utils/api";
 import { FaUsers, FaTasks, FaCheckCircle } from "react-icons/fa";
 
-export default function Dashboard() {
+// export default function Dashboard() {
+export default function Dashboard({ setActivePage, setStatus }) {
   const [stats, setStats] = useState({
     total: 0,
     assigned: 0,
@@ -65,7 +66,7 @@ export default function Dashboard() {
 
   return (
     <div className="cards">
-      <div className="card">
+      {/* <div className="card">
         <div className="icon orange">
           <FaUsers />
         </div>
@@ -82,6 +83,47 @@ export default function Dashboard() {
       </div>
 
       <div className="card">
+        <div className="icon green">
+          <FaCheckCircle />
+        </div>
+        <p>Converted Leads</p>
+        <h2>{stats.converted}</h2>
+      </div> */}
+      <div
+        className="card"
+        onClick={() => {
+          setStatus(""); // show all leads
+          setActivePage("leads");
+        }}
+      >
+        <div className="icon orange">
+          <FaUsers />
+        </div>
+        <p>Total Leads</p>
+        <h2>{stats.total}</h2>
+      </div>
+
+      <div
+        className="card"
+        onClick={() => {
+          setStatus("assigned");
+          setActivePage("leads");
+        }}
+      >
+        <div className="icon blue">
+          <FaTasks />
+        </div>
+        <p>Assigned Leads</p>
+        <h2>{stats.assigned}</h2>
+      </div>
+
+      <div
+        className="card"
+        onClick={() => {
+          setStatus("converted");
+          setActivePage("leads");
+        }}
+      >
         <div className="icon green">
           <FaCheckCircle />
         </div>

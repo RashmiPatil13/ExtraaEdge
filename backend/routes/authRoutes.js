@@ -119,10 +119,15 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ message: "Invalid password" });
   }
 
-  if (!user.isApproved) {
-    return res.status(403).json({ message: "Account not approved by admin" });
-  }
+  // if (!user.isApproved) {
+  //   return res.status(403).json({ message: "Account not approved by admin" });
+  // }
 
+  if (!user.isApproved) {
+    return res.status(403).json({
+      message: "Wait for admin approval",
+    });
+  }
   // 🔥 GENERATE TOKEN HERE
   const token = jwt.sign(
     {

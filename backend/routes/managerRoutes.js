@@ -189,18 +189,37 @@ router.get(
     }
   }
 );
+// router.get("/leads", authMiddleware(["manager", "admin"]), async (req, res) => {
+//   const { status } = req.query;
+
+//   let query = {};
+
+//   if (status) query.status = status;
+
+//   const leads = await Lead.find(query).populate("assignedTo", "name");
+
+//   res.json(leads);
+// });
+
 router.get("/leads", authMiddleware(["manager", "admin"]), async (req, res) => {
-  const { status } = req.query;
+  try {
+    const { status } = req.query;
 
-  let query = {};
+    let query = {};
 
-  if (status) query.status = status;
+    if (status === "assigned") {
+      query.assignedTo = { $ne: null }; // assigned leads
+    } else if (status) {
+      query.status = status; // converted, cold, followup etc
+    }
 
-  const leads = await Lead.find(query).populate("assignedTo", "name");
+    const leads = await Lead.find(query).populate("assignedTo", "name");
 
-  res.json(leads);
+    res.json(leads);
+  } catch (err) {
+    res.status(500).json({ msg: "Error fetching leads" });
+  }
 });
-
 router.get("/export", authMiddleware(["manager"]), async (req, res) => {
   const leads = await Lead.find();
 
@@ -297,6 +316,21 @@ router.get("/telecallers", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "Error fetching telecallers" });
   }
+});
+
+router.post("/messages/send", authMiddleware(["manager"]), async (req, res) => {
+  const { message, role } = req.body;
+
+  const newMessage = new Notification({
+    message,
+    role,
+    senderName: req.user.name,
+    senderRole: req.user.role,
+  });
+
+  await newMessage.save();
+
+  res.json({ msg: "Message sent" });
 });
 export default router;
 

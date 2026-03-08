@@ -72,7 +72,7 @@ export default function TelecallerChart() {
     <div className="chart-box">
       <h3>Performance Chart</h3>
 
-      <PieChart width={350} height={280}>
+      <PieChart width={400} height={300}>
         <Pie data={data} dataKey="value" nameKey="name" outerRadius={100} label>
           {data.map((entry, index) => (
             <Cell key={index} fill={COLORS[index]} />

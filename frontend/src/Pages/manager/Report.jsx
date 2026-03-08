@@ -187,7 +187,11 @@ export default function Report() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" fill="#FF8042" />
+          <Bar dataKey="count">
+            {chartData.map((entry, index) => (
+              <Cell key={index} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Bar>
         </BarChart>
       </div>
     </div>

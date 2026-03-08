@@ -33,6 +33,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./manager.css";
+import { toast } from "react-toastify";
 
 export default function UploadExcel() {
   const [file, setFile] = useState(null);
@@ -49,7 +50,9 @@ export default function UploadExcel() {
       },
     });
 
-    alert("Leads uploaded successfully");
+    // alert("Leads uploaded successfully");
+    toast.success("Leads uploaded successfully!");
+
     setFile(null);
   };
 

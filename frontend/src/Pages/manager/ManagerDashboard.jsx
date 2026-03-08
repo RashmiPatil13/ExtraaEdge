@@ -10,8 +10,9 @@ import UploadExcel from "./UploadExcel";
 import ManagerDateAnalytics from "./ManagerDateAnalytics";
 import ManagerLeadsTable from "./ManagerLeadsTable";
 import Report from "./Report";
-
-import "../manager/manager.css";
+import ManagerSetting from "./ManagerSetting";
+import { toast } from "react-toastify";
+import "./manager.css";
 
 export default function ManagerDashboard() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -28,6 +29,21 @@ export default function ManagerDashboard() {
       .catch((err) => console.log(err));
   }, [status]);
 
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  const fetchNotifications = async () => {
+    try {
+      const res = await api.get("/notifications");
+
+      res.data.forEach((n) => {
+        toast.info(n.message);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="admin-layout">
       <Sidebar setActivePage={setActivePage} />
@@ -49,7 +65,7 @@ export default function ManagerDashboard() {
 
         {activePage === "dashboard" && (
           <>
-            <Dashboard />
+            <Dashboard setActivePage={setActivePage} setStatus={setStatus} />
             <ManagerDateAnalytics />
           </>
         )}
@@ -62,6 +78,7 @@ export default function ManagerDashboard() {
         {activePage === "leads" && (
           <ManagerLeadsTable leads={leads} setLeads={setLeads} />
         )}
+        {activePage === "settings" && <ManagerSetting />}
       </div>
     </div>
   );

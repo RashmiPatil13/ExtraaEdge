@@ -89,13 +89,32 @@ router.get("/users", authMiddleware(["admin"]), async (req, res) => {
 //     res.json({ message: "User approved" });
 //   }
 // );
-router.put("/approve/:id", authMiddleware(["admin"]), async (req, res) => {
-  await User.findByIdAndUpdate(req.params.id, {
-    isApproved: true,
-  });
-  res.json({ message: "User approved" });
-});
+// router.put("/approve/:id", authMiddleware(["admin"]), async (req, res) => {
+//   await User.findByIdAndUpdate(req.params.id, {
+//     isApproved: true,
+//   });
+//   res.json({ message: "User approved" });
+// });
+// approve and disapprove
+router.put(
+  "/toggle-approval/:id",
+  authMiddleware(["admin"]),
+  async (req, res) => {
+    const user = await User.findById(req.params.id);
 
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.isApproved = !user.isApproved; // toggle true/false
+    await user.save();
+
+    res.json({
+      message: `User ${user.isApproved ? "approved" : "disapproved"}`,
+      isApproved: user.isApproved,
+    });
+  }
+);
 /*  EDIT USER  */
 // router.put(
 //   "/edit/:id",
@@ -130,19 +149,39 @@ router.delete("/delete/:id", authMiddleware(["admin"]), async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
   res.json({ message: "User deleted" });
 });
+//  disapprove
+// router.put("/disapprove/:id", authMiddleware(["admin"]), async (req, res) => {
+//   await User.findByIdAndUpdate(req.params.id, {
+//     isApproved: false,
+//   });
 
-// Lead.aggregate([
-//   {
-//     $group: {
-//       _id: "$assignedTo",
-//       total: { $sum: 1 },
-//       converted: {
-//         $sum: {
-//           $cond: [{ $eq: ["$status", "converted"] }, 1, 0],
-//         },
-//       },
-//     },
-//   },
-// ]);
+//   res.json({ message: "User disapproved" });
+// });
 
+import Notification from "../models/Notification.js";
+
+/* GET USERS BY ROLE */
+router.get("/users/:role", authMiddleware(["admin"]), async (req, res) => {
+  const users = await User.find({ role: req.params.role }, "-password");
+  res.json(users);
+});
+
+/* SEND NOTIFICATION */
+router.post(
+  "/send-notification",
+  authMiddleware(["admin"]),
+  async (req, res) => {
+    const { message, role, userId } = req.body;
+
+    const notification = new Notification({
+      message,
+      role,
+      userId: userId || null,
+    });
+
+    await notification.save();
+
+    res.json({ message: "Notification sent successfully" });
+  }
+);
 export default router;

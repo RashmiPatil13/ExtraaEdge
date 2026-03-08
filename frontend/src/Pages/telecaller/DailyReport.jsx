@@ -53,16 +53,58 @@ export default function DailyReport() {
     try {
       await api.delete(`/telecaller/lead/${id}`);
       alert("Deleted successfully");
-      fetchData(); // 🔥 auto refresh table
+      fetchData(); //  auto refresh
     } catch (err) {
       console.log(err);
       alert("Delete failed");
     }
   };
+  const exportToCSV = () => {
+    const headers = ["Name", "Status", "Remarks"];
 
+    const rows = data.map((d) => [d.name, d.status, d.remarks || "-"]);
+
+    let csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers, ...rows].map((e) => e.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "daily_report.csv");
+
+    document.body.appendChild(link);
+    link.click();
+  };
   return (
     <div>
-      <h2>Daily Report</h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "15px",
+        }}
+      >
+        <h2>Daily Report</h2>
+
+        <button
+          onClick={exportToCSV}
+          style={{
+            background: "#ff6b00",
+            color: "white",
+            border: "none",
+            padding: "10px 35px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontWeight: "700",
+            marginRight: "100px",
+          }}
+        >
+          Export
+        </button>
+      </div>
 
       <table>
         <thead>
@@ -70,7 +112,7 @@ export default function DailyReport() {
             <th>Name</th>
             <th>Status</th>
             <th>Remarks</th>
-            <th>Delete</th> {/* ✅ New column */}
+            <th>Delete</th>
           </tr>
         </thead>
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./auth.css";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -15,10 +16,13 @@ export default function Register() {
   const register = async () => {
     try {
       await axios.post("http://localhost:5000/api/auth/register", form);
-      alert("Registered Successfully");
+      // alert("Registered Successfully");
+      toast.success("Registered successfully!");
+
       navigate("/login");
     } catch (err) {
-      alert(err.response.data.message);
+      // alert(err.response.data.message);
+      toast.error(err.response?.data?.message || "registration Failed!");
     }
   };
 

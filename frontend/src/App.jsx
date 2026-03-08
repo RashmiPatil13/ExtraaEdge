@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Register from "./Pages/Registration";
-import AdminDashboard from "./Pages/AdminDashboard";
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import ManagerDashboard from "./Pages/manager/ManagerDashboard";
 import TelecallerDashboard from "./Pages/telecaller/TelecallerDashboard";
 import TelecallerReport from "./Pages/telecaller/TelecallerReport";
 import LandingPage from "./Pages/HomePage/Landingpage";
 import Contact from "./Pages/HomePage/Contact";
-import Chatbot from "./Pages/HomePage/Chatbot";
+// import Chatbot from "./Pages/HomePage/Chatbot";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path="/telecaller/report" element={<TelecallerReport />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-      <Chatbot />
+      {/* <Chatbot /> */}
       {/* </div> */}
     </BrowserRouter>
   );

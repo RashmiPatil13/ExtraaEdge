@@ -29,12 +29,16 @@
 //     </div>
 //   );
 // }
+
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import api from "../utils/api";
+// import "../manager/manager.css";
 
 export default function Sidebar({ setActivePage }) {
   const navigate = useNavigate();
   const [active, setActive] = useState("dashboard");
+  const [notifications, setNotifications] = useState([]);
 
   const handleClick = (page) => {
     setActive(page);
@@ -46,9 +50,19 @@ export default function Sidebar({ setActivePage }) {
     navigate("/login");
   };
 
+  // Fetch notifications
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  const fetchNotifications = async () => {
+    const res = await api.get("/notifications");
+    setNotifications(res.data);
+  };
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
+
   return (
     <div className="sidebar">
-      {/* Top Orange Header with Logo */}
       <div className="sidebar-top">
         <img src="logo.png" alt="logo" className="sidebar-logo" />
         <h2>ExtraaEdge</h2>
@@ -96,6 +110,10 @@ export default function Sidebar({ setActivePage }) {
           onClick={() => handleClick("reports")}
         >
           📊 Reports
+        </li>
+        <li onClick={() => handleClick("settings")}>
+          ⚙️ Settings
+          {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
         </li>
       </ul>
 

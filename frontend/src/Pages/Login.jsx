@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./auth.css";
 import api from "./utils/api";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,13 +21,17 @@ export default function Login() {
 
       if (res.data.role === "admin") {
         navigate("/admin");
+        toast.success("Login successfully!");
       } else if (res.data.role === "manager") {
         navigate("/manager");
+        toast.success("Login successfully!");
       } else {
         navigate("/telecaller");
+        toast.success("Login successfully!");
       }
     } catch (err) {
-      alert(err.response?.data?.message || "Login Failed");
+      // alert(err.response?.data?.message || "Login Failed");
+      toast.error(err.response?.data?.message || "Login Failed!");
     }
   };
 

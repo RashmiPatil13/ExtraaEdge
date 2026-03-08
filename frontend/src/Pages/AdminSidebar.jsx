@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "./admin.css";
+// import "./admin.css";
 
 /*  SIDEBAR COMPONENT  */
 // function Sidebar({ setActivePage }) {

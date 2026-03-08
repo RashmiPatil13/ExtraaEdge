@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/admin.js";
 import managerRoutes from "./routes/managerRoutes.js";
 import telecallerRoutes from "./routes/telecallerRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 import path from "path";
 const app = express();
@@ -19,6 +20,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/manager", managerRoutes);
 app.use("/api/telecaller", telecallerRoutes);
 app.use("/uploads", express.static("uploads"));
+app.use("/api", notificationRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
