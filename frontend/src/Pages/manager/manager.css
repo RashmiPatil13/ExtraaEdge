@@ -48,7 +48,7 @@ html {
   align-items: center;
   gap: 10px;
   height: 100px;
-  width: 400px !important;
+  width: 800px !important;
 }
 
 /* Menu */
@@ -141,6 +141,13 @@ html {
   flex-direction: column;
   gap: 15px; /* 👈 space between text & number */
   margin-top: 30px;
+  border: 2px solid rgb(232, 142, 109);
+}
+
+.card:focus {
+  border: 2px solid #ff6a00 !important; /* Dark orange border */
+  background-color: #ff6803 !important; /* Slightly darker light orange */
+  box-shadow: 23 19 25px #ff6a00;
 }
 
 .card p {
@@ -426,4 +433,101 @@ td {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.msg-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.delete-btn:hover {
+  color: red;
+}
+/* Overlay background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*  edit lead data Modal box */
+.edit-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Form rows */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-row label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-row input,
+.form-row select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.save-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #218838;
+}
+
+.cancel-btn:hover {
+  background: #c82333;
+}
+.notification-dot {
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 8px;
 }

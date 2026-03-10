@@ -322,7 +322,8 @@ export default function AdminDashboard() {
   const [showModal, setShowModal] = useState(true);
   const [chartData, setChartData] = useState([]);
   const navigate = useNavigate();
-
+  const [notifications, setNotifications] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [stats, setStats] = useState({
     totalLeads: 0,
     totalManagers: 0,
@@ -370,14 +371,13 @@ export default function AdminDashboard() {
     }
   };
 
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
   return (
-    <div className="admin-layout">
+    <div className="dashboard-container">
       {/* SIDEBAR */}
-      <div className="adminsidebar">
-        <h2 className="logo">
-          <img src="images/logo.png" alt="" />
-          ExtraaEdge CRM
-        </h2>
+      {/* <div className="sidebar"> */}
+      <div className={`sidebar ${menuOpen ? "open" : ""}`}>
+        <h2>ExtraaEdge CRM</h2>
 
         <ul>
           <li onClick={() => setActivePage("dashboard")}>🏠 Dashboard</li>
@@ -386,7 +386,31 @@ export default function AdminDashboard() {
             📞 Manage Telecallers
           </li>
           <li onClick={() => setActivePage("leadReports")}>📊 Lead Reports</li>
-          <li onClick={() => setActivePage("settings")}>⚙️ Settings</li>
+          {/* <li onClick={() => setActivePage("settings")}>
+            ⚙️ Settings
+            {unreadCount > 0 && <span className="notification-dot"></span>}
+          </li> */}
+          <li
+            className="settings-menu"
+            onClick={async () => {
+              setActivePage("settings");
+
+              try {
+                await api.put("/notifications/mark-read");
+
+                // remove dot instantly
+                setNotifications((prev) =>
+                  prev.map((n) => ({ ...n, isRead: true }))
+                );
+              } catch (err) {
+                console.log(err);
+              }
+            }}
+          >
+            ⚙️ Settings
+            {unreadCount > 0 && <span className="notification-dot"></span>}
+          </li>
+
           <li className="logout" onClick={logout}>
             🚪 Logout
           </li>
@@ -408,7 +432,6 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* PAGE CONTENT */}
         <div className="page-content">
           {/* {activePage === "dashboard" && <Dashboard />} */}
           {activePage === "dashboard" && (

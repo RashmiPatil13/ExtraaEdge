@@ -12,7 +12,63 @@ body {
   overflow-x: hidden;
   background: #f8fafc;
 }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 60px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo h2 {
+  color: #26448f;
+}
+
+.logo p {
+  font-size: 12px;
+  color: #888;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+}
+.nav-links li {
+  cursor: pointer;
+  color: #444;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-links li:hover {
+  color: #ff6a00;
+}
+
+.nav-links li {
+  cursor: pointer;
+  color: #444;
+}
+
+.active {
+  color: #ff6a00;
+}
+.login-btn {
+  background: #ff6a00;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
 /* ================= CONTACT PAGE ================= */
 .contact-page {
   width: 100vw;

@@ -7,17 +7,6 @@
 
 /* LAYOUT  */
 
-.admin-layout {
-  display: flex;
-  min-height: 100vh;
-  width: 100vw;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
 .main-content {
   flex: 1;
   width: calc(100vw - 230px); /* sidebar width */
@@ -25,7 +14,7 @@
   flex-direction: column;
 }
 /* SIDEBAR */
-.adminsidebar {
+/* .adminsidebar {
   width: 250px;
   background: #f97316;
   padding: 20px;
@@ -57,6 +46,71 @@
   background: white;
   color: #f97316;
   font-weight: 600;
+} */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  /* overflow: hidden; */
+}
+
+/* ===== SIDEBAR ===== */
+
+.sidebar {
+  width: 250px;
+  background: #12002c !important;
+  border-right: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar h2 {
+  background: #ff6b00 !important;
+  color: white !important;
+  padding: 30px 40px;
+  margin: 0;
+}
+
+.sidebar ul {
+  list-style: none !important;
+  padding: 8px 20px 0 20px !important;
+  margin-bottom: 170px !important;
+}
+
+.sidebar ul li {
+  padding: 12px 15px !important;
+  border-radius: 8px !important;
+  margin-bottom: 15px !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  color: #fffdfd !important;
+  font-size: larger !important;
+  background: transparent !important;
+}
+
+/* .sidebar ul li:hover,
+.sidebar ul li:active,
+.sidebar ul li:focus {
+  background: transparent !important;
+  outline: none !important;
+} */
+
+.sidebar ul li.active {
+  background: #fff2e8 !important;
+  color: #ff6b00 !important;
+  font-weight: 600 !important;
+}
+
+.logout-btn {
+  margin: 20px !important;
+  padding: 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid #ff6b00 !important;
+  background: white !important;
+  color: #ff6b00 !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  margin-top: auto !important;
+  width: 250px !important;
+  margin-top: 160px;
 }
 
 /*  TOP BAR  */
@@ -436,13 +490,14 @@ h2 img {
   background: #ea580c;
 }
 
-/* setting  */
+/* -----------------------------setting --------------------- */
 .settings-container {
   background: white;
   padding: 30px;
   border-radius: 12px;
   width: 600px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-left: 230px;
 }
 
 .settings-container h2 {
@@ -476,4 +531,51 @@ h2 img {
   padding: 10px;
   border-radius: 6px;
   cursor: pointer;
+}
+.messages-container {
+  margin-top: 20px;
+}
+
+.message-card {
+  background: #f5f6ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #6366f1;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.msg-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.delete-btn:hover {
+  color: red;
+}
+.settings-menu {
+  position: relative;
+}
+
+.notification-dot {
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  right: 10px;
 }

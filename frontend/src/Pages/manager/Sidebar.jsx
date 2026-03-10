@@ -40,9 +40,20 @@ export default function Sidebar({ setActivePage }) {
   const [active, setActive] = useState("dashboard");
   const [notifications, setNotifications] = useState([]);
 
-  const handleClick = (page) => {
+  const handleClick = async (page) => {
     setActive(page);
     setActivePage(page);
+
+    if (page === "settings") {
+      try {
+        await api.put("/notifications/mark-read");
+
+        // update state locally so dot disappears immediately
+        setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const logout = () => {
@@ -61,12 +72,19 @@ export default function Sidebar({ setActivePage }) {
   };
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
+  // useEffect(() => {
+  //   fetchNotifications();
+
+  //   const interval = setInterval(fetchNotifications, 10000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
   return (
     <div className="sidebar">
-      <div className="sidebar-top">
-        <img src="logo.png" alt="logo" className="sidebar-logo" />
-        <h2>ExtraaEdge</h2>
-      </div>
+      {/* <div className="sidebar-top"> */}
+      {/* <img src="logo.png" alt="logo" className="sidebar-logo" /> */}
+      <h2>ExtraaEdge</h2>
+      {/* </div> */}
 
       {/* Menu */}
       <ul className="menu">
@@ -113,7 +131,7 @@ export default function Sidebar({ setActivePage }) {
         </li>
         <li onClick={() => handleClick("settings")}>
           ⚙️ Settings
-          {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
+          {unreadCount > 0 && <span className="notification-dot"></span>}
         </li>
       </ul>
 

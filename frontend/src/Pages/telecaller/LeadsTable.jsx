@@ -4,6 +4,7 @@ import Select from "react-select";
 
 export default function MyLeads() {
   const [leads, setLeads] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("all");
 
   // useEffect(() => {
   //   api.get("/telecaller/my-leads").then((res) => setLeads(res.data));
@@ -50,10 +51,35 @@ export default function MyLeads() {
     );
   };
 
+  useEffect(() => {
+    fetchLeads();
+  }, [statusFilter]);
+
+  const fetchLeads = async () => {
+    try {
+      const res = await api.get(`/telecaller/my-leads?status=${statusFilter}`);
+      setLeads(res.data);
+    } catch (error) {
+      console.log("Fetch Leads Error:", error);
+    }
+  };
+
   return (
     <div>
       <h2>My Leads</h2>
+      <div className="lead-filters">
+        <button onClick={() => setStatusFilter("all")}>All</button>
 
+        <button onClick={() => setStatusFilter("pending")}>Pending</button>
+
+        <button onClick={() => setStatusFilter("followup")}>Follow Up</button>
+
+        <button onClick={() => setStatusFilter("callback")}>Callback</button>
+
+        <button onClick={() => setStatusFilter("converted")}>Converted</button>
+
+        <button onClick={() => setStatusFilter("cold")}>Cold</button>
+      </div>
       <table>
         <thead>
           <tr>

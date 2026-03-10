@@ -46,37 +46,38 @@ const Contact = () => {
   return (
     <>
       {/* ================= HEADER ================= */}
-      <header className="navbar">
-        <div className="logo-section">
-          <div className="logo-box">
-            <img src={logo} alt="ExtraaEdge Logo" />
-          </div>
+      <nav className="navbar">
+        <div className="logo">
+          <span className="logo-icon">🛡️</span>
 
-          <div className="logo-text">
-            <h1>ExtraaEdge</h1>
+          <div>
+            <h2>ExtraaEdge</h2>
             <p>Lead Management & Telecalling CRM System</p>
           </div>
         </div>
 
-        <nav className="nav-links">
+        <ul className="nav-links">
           {navItems.map((item) => (
-            <button
+            <li
               key={item}
-              className={`nav-btn ${activeNav === item ? "active" : ""}`}
+              className={activeNav === item ? "active" : ""}
               onClick={() => handleNavClick(item)}
             >
               {item}
-            </button>
+            </li>
           ))}
 
-          <button
-            className="btn-get-started-nav"
-            onClick={() => navigate("/login")}
+          <li
+            className="login-btn"
+            onClick={() => {
+              setActiveNav("Login");
+              navigate("/login");
+            }}
           >
             Login
-          </button>
-        </nav>
-      </header>
+          </li>
+        </ul>
+      </nav>
 
       {/* ================= CONTACT PAGE ================= */}
       <section className="contact-page">

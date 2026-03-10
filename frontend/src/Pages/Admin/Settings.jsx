@@ -8,9 +8,11 @@ export default function Settings() {
   const [sendType, setSendType] = useState("all");
   const [selectedUser, setSelectedUser] = useState("");
   const [message, setMessage] = useState("");
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     fetchUsers();
+    fetchNotifications();
   }, [role]);
 
   const fetchUsers = async () => {
@@ -37,6 +39,27 @@ export default function Settings() {
     } catch (err) {
       //   alert("Failed to send");
       toast.error("Failed to send notification");
+    }
+  };
+
+  const fetchNotifications = async () => {
+    try {
+      const res = await api.get("/notifications");
+      setNotifications(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const deleteMessage = async (id) => {
+    try {
+      await api.delete(`/notifications/${id}`);
+
+      toast.success("Message deleted");
+
+      fetchNotifications(); // refresh messages
+    } catch (err) {
+      console.log(err);
+      toast.error("Delete failed");
     }
   };
 
@@ -102,6 +125,35 @@ export default function Settings() {
       />
 
       <button onClick={sendNotification}>Send Notification</button>
+
+      <h3 style={{ marginTop: "30px" }}>💬 Messages</h3>
+
+      <div className="messages-container">
+        {notifications.length === 0 ? (
+          <p>No messages</p>
+        ) : (
+          notifications.map((n) => (
+            <div key={n._id} className="message-card">
+              <div className="message-header">
+                <strong>{n.senderName || "User"}</strong>
+
+                <div className="msg-right">
+                  <span>{new Date(n.createdAt).toLocaleString()}</span>
+
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteMessage(n._id)}
+                  >
+                    🗑
+                  </button>
+                </div>
+              </div>
+
+              <p>{n.message}</p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

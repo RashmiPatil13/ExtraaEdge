@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 
 import "./telecaller.css";
+import TelecallerSetting from "./TelecallerSetting";
 
 const TelecallerDashboard = () => {
   const navigate = useNavigate();
@@ -94,6 +95,13 @@ const TelecallerDashboard = () => {
           >
             Daily Report
           </li>
+          <li
+            className={activePage === "setting" ? "active" : ""}
+            onClick={() => setActivePage("setting")}
+          >
+            Settings
+            {/* {unreadCount > 0 && <span className="badge">{unreadCount}</span>} */}
+          </li>
         </ul>
 
         <button className="logout-btn" onClick={logout}>
@@ -168,6 +176,7 @@ const TelecallerDashboard = () => {
         {activePage === "report" && <DailyReport />}
         {activePage === "charts" && <TelecallerChart />}
         {activePage === "charts" && <TelecallerDailyBarChart />}
+        {activePage === "setting" && <TelecallerSetting />}
       </div>
     </div>
   );

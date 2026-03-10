@@ -29,21 +29,6 @@ export default function ManagerDashboard() {
       .catch((err) => console.log(err));
   }, [status]);
 
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
-
-  const fetchNotifications = async () => {
-    try {
-      const res = await api.get("/notifications");
-
-      res.data.forEach((n) => {
-        toast.info(n.message);
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <div className="admin-layout">
       <Sidebar setActivePage={setActivePage} />

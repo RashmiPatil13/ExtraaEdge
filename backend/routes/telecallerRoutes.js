@@ -5,9 +5,26 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 /* GET ASSIGNED LEADS FOR TELECALLER */
+// router.get("/my-leads", authMiddleware(["telecaller"]), async (req, res) => {
+//   try {
+//     const leads = await Lead.find({ assignedTo: req.user.id });
+//     res.json(leads);
+//   } catch (err) {
+//     res.status(500).json({ msg: "Error fetching leads" });
+//   }
+// });
 router.get("/my-leads", authMiddleware(["telecaller"]), async (req, res) => {
   try {
-    const leads = await Lead.find({ assignedTo: req.user.id });
+    const { status } = req.query;
+
+    let filter = { assignedTo: req.user.id };
+
+    if (status && status !== "all") {
+      filter.status = status;
+    }
+
+    const leads = await Lead.find(filter);
+
     res.json(leads);
   } catch (err) {
     res.status(500).json({ msg: "Error fetching leads" });

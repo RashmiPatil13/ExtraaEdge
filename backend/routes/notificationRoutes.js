@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import Notification from "../models/Notification.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
+import User from "../models/User.js";
 
 const router = express.Router();
 
@@ -38,13 +39,13 @@ router.post(
   authMiddleware(["manager", "telecaller", "admin"]),
   async (req, res) => {
     try {
-      const { message, role } = req.body;
+      const { message, role, userId } = req.body;
 
       const newMessage = new Notification({
         message,
-        role, // admin / telecaller
+        role, // receiver role
         senderName: req.user.name,
-        userId: null,
+        userId: userId || null,
       });
 
       await newMessage.save();
@@ -56,6 +57,35 @@ router.post(
     }
   }
 );
+router.get("/managers", async (req, res) => {
+  try {
+    const managers = await User.find({ role: "manager" }).select("name");
+    res.json(managers);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching managers" });
+  }
+});
+
+router.delete("/notifications/:id", async (req, res) => {
+  try {
+    await Notification.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Delete failed" });
+  }
+});
+router.put("/notifications/mark-read", async (req, res) => {
+  try {
+    await Notification.updateMany(
+      { isRead: false },
+      { $set: { isRead: true } }
+    );
+
+    res.json({ msg: "Notifications marked as read" });
+  } catch (err) {
+    res.status(500).json({ msg: "Error updating notifications" });
+  }
+});
 
 export default router;
 // import express from "express";

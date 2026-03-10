@@ -1,3 +1,111 @@
+// import { useState } from "react";
+// import axios from "axios";
+// import { Link, useNavigate } from "react-router-dom";
+// import "./auth.css";
+// import { toast } from "react-toastify";
+
+// export default function Register() {
+//   const navigate = useNavigate();
+//   const [form, setForm] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     role: "telecaller",
+//   });
+
+//   const register = async () => {
+//     try {
+//       await axios.post("http://localhost:5000/api/auth/register", form);
+//       // alert("Registered Successfully");
+//       toast.success("Registered successfully!");
+
+//       navigate("/login");
+//     } catch (err) {
+//       // alert(err.response.data.message);
+//       toast.error(err.response?.data?.message || "registration Failed!");
+//     }
+//   };
+
+//   return (
+//     <>
+//       <nav className="navbar">
+//         <div className="logo">
+//           <span className="logo-icon">🛡️</span>
+
+//           <div>
+//             <h2>ExtraaEdge</h2>
+//             <p>Lead Management & Telecalling CRM System</p>
+//           </div>
+//         </div>
+
+//         <ul className="nav-links">
+//           {navItems.map((item) => (
+//             <li
+//               key={item}
+//               className={activeNav === item ? "active" : ""}
+//               onClick={() => handleNavClick(item)}
+//             >
+//               {item}
+//             </li>
+//           ))}
+
+//           <li
+//             className="login-btn"
+//             onClick={() => {
+//               setActiveNav("Login");
+//               navigate("/login");
+//             }}
+//           >
+//             Login
+//           </li>
+//         </ul>
+//       </nav>
+//       <div className="auth-container">
+//         <div className="auth-left">
+//           <h2>Registration</h2>
+
+//           <input
+//             type="text"
+//             placeholder="Full Name"
+//             onChange={(e) => setForm({ ...form, name: e.target.value })}
+//           />
+
+//           <input
+//             type="email"
+//             placeholder="Email"
+//             onChange={(e) => setForm({ ...form, email: e.target.value })}
+//           />
+
+//           <input
+//             type="password"
+//             placeholder="Password"
+//             onChange={(e) => setForm({ ...form, password: e.target.value })}
+//           />
+
+//           <select onChange={(e) => setForm({ ...form, role: e.target.value })}>
+//             <option value="">Select Role</option>
+//             <option value="manager">Manager</option>
+//             <option value="telecaller">Telecaller</option>
+//           </select>
+
+//           <button onClick={register}>Register</button>
+
+//           <p>
+//             Already have an account? <Link to="/">Login</Link>
+//           </p>
+//         </div>
+
+//         <div className="auth-right">
+//           <div>
+//             <h1>WELCOME!</h1>
+//             <h2>ExtraaEdge CRM</h2>
+//             <p>Create your account to continue</p>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +114,19 @@ import { toast } from "react-toastify";
 
 export default function Register() {
   const navigate = useNavigate();
+
+  const [activeNav, setActiveNav] = useState("Register");
+
+  const navItems = ["Home", "Features", "Contact"];
+
+  const handleNavClick = (item) => {
+    setActiveNav(item);
+
+    if (item === "Home") navigate("/");
+    if (item === "Features") navigate("/features");
+    if (item === "Contact") navigate("/contact");
+  };
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -16,172 +137,99 @@ export default function Register() {
   const register = async () => {
     try {
       await axios.post("http://localhost:5000/api/auth/register", form);
-      // alert("Registered Successfully");
+
       toast.success("Registered successfully!");
 
       navigate("/login");
     } catch (err) {
-      // alert(err.response.data.message);
-      toast.error(err.response?.data?.message || "registration Failed!");
+      toast.error(err.response?.data?.message || "Registration Failed!");
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-left">
-        <h2>Registration</h2>
+    <>
+      <div className="auth-page">
+        {/* NAVBAR */}
+        <nav className="navbar">
+          <div className="logo">
+            <span className="logo-icon">🛡️</span>
 
-        <input
-          type="text"
-          placeholder="Full Name"
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
+            <div>
+              <h2>ExtraaEdge</h2>
+              <p>Lead Management & Telecalling CRM System</p>
+            </div>
+          </div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
+          <ul className="nav-links">
+            {navItems.map((item) => (
+              <li
+                key={item}
+                className={activeNav === item ? "active" : ""}
+                onClick={() => handleNavClick(item)}
+              >
+                {item}
+              </li>
+            ))}
 
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
+            <li
+              className="login-btn"
+              onClick={() => {
+                setActiveNav("Login");
+                navigate("/login");
+              }}
+            >
+              Login
+            </li>
+          </ul>
+        </nav>
 
-        <select onChange={(e) => setForm({ ...form, role: e.target.value })}>
-          <option value="">Select Role</option>
-          <option value="manager">Manager</option>
-          <option value="telecaller">Telecaller</option>
-        </select>
+        {/* REGISTER SECTION */}
+        <div className="auth-container">
+          <div className="auth-left">
+            <h2>Registration</h2>
 
-        <button onClick={register}>Register</button>
+            <input
+              type="text"
+              placeholder="Full Name"
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
 
-        <p>
-          Already have an account? <Link to="/">Login</Link>
-        </p>
-      </div>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
 
-      <div className="auth-right">
-        <div>
-          <h1>WELCOME!</h1>
-          <h2>ExtraaEdge CRM</h2>
-          <p>Create your account to continue</p>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+            />
+
+            <select
+              onChange={(e) => setForm({ ...form, role: e.target.value })}
+            >
+              <option value="">Select Role</option>
+              <option value="manager">Manager</option>
+              <option value="telecaller">Telecaller</option>
+            </select>
+
+            <button onClick={register}>Register</button>
+
+            <p>
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+          </div>
+
+          <div className="auth-right">
+            <div>
+              <h1>WELCOME!</h1>
+              <h2>ExtraaEdge CRM</h2>
+              <p>Create your account to continue</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
-
-// import { useState } from "react";
-// import axios from "axios";
-
-// export default function Register() {
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//     role: "telecaller",
-//   });
-
-//   const submit = async () => {
-//     await axios.post("http://localhost:5000/api/auth/register", form);
-//     alert("Registered");
-//   };
-
-//   return (
-//     <div className="auth-box">
-//       <h2>Register</h2>
-//       <input
-//         placeholder="Name"
-//         onChange={(e) => setForm({ ...form, name: e.target.value })}
-//       />
-//       <input
-//         placeholder="Email"
-//         onChange={(e) => setForm({ ...form, email: e.target.value })}
-//       />
-//       <input
-//         type="password"
-//         placeholder="Password"
-//         onChange={(e) => setForm({ ...form, password: e.target.value })}
-//       />
-
-//       <select onChange={(e) => setForm({ ...form, role: e.target.value })}>
-//         <option value="manager">Manager</option>
-//         <option value="telecaller">Telecaller</option>
-//       </select>
-
-//       <button onClick={submit}>Register</button>
-//     </div>
-//   );
-// }
-
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { Link } from "react-router-dom";
-// import "../Pages/auth.css";
-
-// const Registration = () => {
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//     role: "",
-//   });
-
-//   const handleChange = (e) =>
-//     setForm({ ...form, [e.target.name]: e.target.value });
-
-//   const handleRegister = async () => {
-//     await axios.post("http://localhost:5000/api/auth/register", form);
-
-//     alert("Registration Successful");
-//   };
-
-//   return (
-//     <div className="auth-container">
-//       <div className="auth-card">
-//         <h2 className="auth-title">Create Account</h2>
-//         <p className="auth-subtitle">Register to access CRM</p>
-
-//         <input
-//           className="auth-input"
-//           name="name"
-//           placeholder="Full Name"
-//           onChange={handleChange}
-//         />
-
-//         <input
-//           className="auth-input"
-//           name="email"
-//           placeholder="Email"
-//           onChange={handleChange}
-//         />
-
-//         <input
-//           className="auth-input"
-//           type="password"
-//           name="password"
-//           placeholder="Password"
-//           onChange={handleChange}
-//         />
-
-//         <select className="auth-input" name="role" onChange={handleChange}>
-//           <option value="">Select Role</option>
-//           <option value="manager">Manager</option>
-//           <option value="telecaller">Telecaller</option>
-//         </select>
-
-//         <button className="auth-btn" onClick={handleRegister}>
-//           Register
-//         </button>
-
-//         <div className="auth-footer">
-//           Already have an account? <Link to="/">Login</Link>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Registration;

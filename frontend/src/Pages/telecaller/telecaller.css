@@ -348,6 +348,28 @@ body {
   margin: 20px;
 }
 
+.lead-filters {
+  margin-bottom: 20px;
+}
+
+.lead-filters button {
+  margin-right: 10px;
+  padding: 6px 14px;
+  border: none;
+  background: #f1f2ff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #12002c;
+  border: 1px solid #ff6a00 !important;
+  margin-top: 20px;
+}
+
+.lead-filters button:hover {
+  /* background: #6366f1; */
+  background: #e66a2d;
+  color: white;
+}
 /* .chart-box {
   display: flex;
   gap: 20px;
@@ -377,4 +399,139 @@ body {
   .manager-stats {
     grid-template-columns: 1fr;
   }
+}
+/* -------setting------- */
+/* .tele-settings {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+.tele-settings h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.messages {
+  margin-bottom: 20px;
+}
+
+.msg-card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.msg-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.msg-card p {
+  color: #444;
+}
+
+.reply-box textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.reply-box button {
+  margin-top: 10px;
+  padding: 10px 18px;
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.reply-box button:hover {
+  background: #e66d00;
+} */
+/* ------------setting PAGE LAYOUT-------------------- */
+
+.tele-settings-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.tele-card {
+  width: 650px;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.send-box {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.send-box select,
+.send-box textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.send-box textarea {
+  height: 80px;
+  resize: none;
+}
+
+.send-box button {
+  width: 150px;
+  padding: 10px;
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.send-box button:hover {
+  background: #e96e00;
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.message-list {
+  margin-top: 20px;
+}
+
+.message-card {
+  background: #f5f6ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 4px solid #6c63ff;
+}
+
+.msg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }

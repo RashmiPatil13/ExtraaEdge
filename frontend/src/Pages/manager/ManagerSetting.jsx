@@ -35,13 +35,23 @@ export default function ManagerSetting() {
     if (!reply.trim()) return alert("Enter message");
 
     try {
-      await api.post("/admin/send-notification", {
+      await api.post("/messages/send", {
         message: reply,
-        role: "admin",
+        role: sendTo === "admin" ? "admin" : "telecaller",
+        userId: sendTo === "admin" ? null : sendTo,
       });
 
       setReply("");
       alert("Message sent");
+
+      fetchNotifications();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const deleteMessage = async (id) => {
+    try {
+      await api.delete(`/notifications/${id}`);
 
       fetchNotifications();
     } catch (err) {
@@ -59,9 +69,23 @@ export default function ManagerSetting() {
         ) : (
           notifications.map((n) => (
             <div key={n._id} className="message-card">
-              <div className="message-header">
+              {/* <div className="message-header">
                 <strong>{n.senderName || "Admin"}</strong>
                 <span>{new Date(n.createdAt).toLocaleString()}</span>
+              </div> */}
+              <div className="message-header">
+                <strong>{n.senderName || "Admin"}</strong>
+
+                <div className="msg-right">
+                  <span>{new Date(n.createdAt).toLocaleString()}</span>
+
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteMessage(n._id)}
+                  >
+                    🗑
+                  </button>
+                </div>
               </div>
 
               <p className="message-text">{n.message}</p>
@@ -71,7 +95,7 @@ export default function ManagerSetting() {
       </div>
 
       <div className="reply-box">
-        <h3>Reply</h3>
+        <h3>Send Message</h3>
 
         <select value={sendTo} onChange={(e) => setSendTo(e.target.value)}>
           <option value="admin">Send to Admin</option>

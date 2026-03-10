@@ -88,41 +88,56 @@ export default function ManagerLeadsTable({ leads, setLeads }) {
         </tbody>
       </table>
       {editData && (
-        <div>
-          <h3>Edit Lead</h3>
+        <div className="modal-overlay">
+          <div className="edit-modal">
+            <h3>Edit Lead</h3>
 
-          <input
-            value={editData.name}
-            onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-          />
+            <div className="form-row">
+              <label>Name</label>
+              <input
+                value={editData.name}
+                onChange={(e) =>
+                  setEditData({ ...editData, name: e.target.value })
+                }
+              />
+            </div>
 
-          <input
-            value={editData.mobile}
-            onChange={(e) =>
-              setEditData({ ...editData, mobile: e.target.value })
-            }
-          />
+            <div className="form-row">
+              <label>Mobile</label>
+              <input
+                value={editData.mobile}
+                onChange={(e) =>
+                  setEditData({ ...editData, mobile: e.target.value })
+                }
+              />
+            </div>
 
-          <input
-            value={editData.email}
-            onChange={(e) =>
-              setEditData({ ...editData, email: e.target.value })
-            }
-          />
+            <div className="form-row">
+              <label>Status</label>
+              <select
+                value={editData.status}
+                onChange={(e) =>
+                  setEditData({ ...editData, status: e.target.value })
+                }
+              >
+                <option>new</option>
+                <option>followup</option>
+                <option>converted</option>
+                <option>cold</option>
+                <option>callback</option>
+              </select>
+            </div>
 
-          <select
-            value={editData.status}
-            onChange={(e) =>
-              setEditData({ ...editData, status: e.target.value })
-            }
-          >
-            <option>new</option>
-            <option>followup</option>
-            <option>converted</option>
-          </select>
+            <div className="modal-buttons">
+              <button className="save-btn" onClick={updateLead}>
+                Save
+              </button>
 
-          <button onClick={updateLead}>Save</button>
-          <button onClick={() => setEditData(null)}>Cancel</button>
+              <button className="cancel-btn" onClick={() => setEditData(null)}>
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
