@@ -370,3 +370,58 @@ body {
   flex-direction: column;
   align-items: center;
 }
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .logo p {
+    display: none;
+  }
+
+  .auth-container {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .auth-left {
+    width: 100%;
+    padding: 30px;
+  }
+
+  .auth-right {
+    width: 100%;
+    clip-path: none;
+    padding: 40px 20px;
+  }
+
+  .auth-right h1 {
+    font-size: 28px;
+  }
+
+  .auth-right h2 {
+    font-size: 18px;
+  }
+}
+@media (max-width: 480px) {
+  .auth-left h2 {
+    font-size: 22px;
+  }
+
+  .auth-left input {
+    font-size: 13px;
+  }
+
+  .auth-left button {
+    padding: 12px;
+  }
+
+  .nav-links {
+    gap: 10px;
+    font-size: 14px;
+  }
+}

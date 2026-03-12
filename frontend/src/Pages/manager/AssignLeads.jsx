@@ -57,7 +57,14 @@ export default function AssignLeads() {
     setLeads(leads.filter((l) => !selectedLeads.includes(l._id)));
     setSelectedLeads([]);
   };
-
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      const allLeadIds = leads.map((lead) => lead._id);
+      setSelectedLeads(allLeadIds);
+    } else {
+      setSelectedLeads([]);
+    }
+  };
   return (
     <div>
       <h2 style={{ margin: "20px" }}>Assign Leads</h2>
@@ -78,13 +85,25 @@ export default function AssignLeads() {
       <table>
         <thead>
           <tr>
-            <th>Select</th>
+            <th>
+              <label style={{ gap: "2px" }}>
+                <input
+                  type="checkbox"
+                  onChange={handleSelectAll}
+                  checked={
+                    selectedLeads.length === leads.length && leads.length > 0
+                  }
+                />
+                Select All
+              </label>
+            </th>
             <th>Name</th>
             <th>Mobile</th>
             <th>Course</th>
             <th>Source</th>
           </tr>
         </thead>
+
         <tbody>
           {leads.map((lead) => (
             <tr key={lead._id}>

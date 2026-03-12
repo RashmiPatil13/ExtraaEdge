@@ -2,6 +2,7 @@ body,
 html {
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 .admin-layout {
@@ -83,7 +84,7 @@ html {
 
 /* Logout Button */
 .logout-btn {
-  margin: 20px;
+  /* margin: 20px; */
   padding: 10px;
   border: 2px solid #f05a0c !important;
   background: white !important;
@@ -530,4 +531,32 @@ td {
   border-radius: 50%;
   display: inline-block;
   margin-left: 8px;
+}
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button:hover {
+  background: #f0f0f0;
+}
+
+.active-page {
+  background: #26448f;
+  color: white;
+  border-color: #26448f;
+}
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

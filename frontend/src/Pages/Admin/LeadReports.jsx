@@ -19,7 +19,8 @@ import CountUp from "react-countup";
 import { saveAs } from "file-saver";
 import "./admin.css";
 
-export default function LeadReports() {
+// export default function LeadReports() {
+export default function LeadReports({ filter }) {
   // SAFE INITIAL STATES
   const [stats, setStats] = useState({
     total: 0,
@@ -30,19 +31,27 @@ export default function LeadReports() {
   const [sourceData, setSourceData] = useState([]);
   const [performanceData, setPerformanceData] = useState([]);
   const [daysFilter, setDaysFilter] = useState(7);
+
   const [leads, setLeads] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const leadsPerPage = 10;
 
   useEffect(() => {
     fetchLeads();
-  }, []);
+  }, [filter]);
 
   const fetchLeads = async () => {
     try {
       const res = await api.get("/manager/leads");
-      setLeads(res.data);
+
+      if (filter === "converted") {
+        setLeads(res.data.filter((l) => l.status === "converted"));
+      } else {
+        setLeads(res.data);
+      }
     } catch (error) {
       console.log(error);
-      alert("Failed to fetch leads");
     }
   };
 
@@ -90,7 +99,15 @@ export default function LeadReports() {
 
   // EXPORT CSV
   const exportCSV = async () => {
+    // const res = await api.get("/manager/leads");
     const res = await api.get("/manager/leads");
+
+    if (filter === "converted") {
+      const converted = res.data.filter((l) => l.status === "converted");
+      setLeads(converted);
+    } else {
+      setLeads(res.data);
+    }
 
     const csv = [
       ["Name", "Status", "Phone"],
@@ -105,6 +122,12 @@ export default function LeadReports() {
 
     saveAs(blob, "leads_report.csv");
   };
+  const indexOfLastLead = currentPage * leadsPerPage;
+  const indexOfFirstLead = indexOfLastLead - leadsPerPage;
+
+  const currentLeads = leads.slice(indexOfFirstLead, indexOfLastLead);
+
+  const totalPages = Math.ceil(leads.length / leadsPerPage);
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#845EC2"];
 
@@ -227,6 +250,7 @@ export default function LeadReports() {
           </BarChart>
         </ResponsiveContainer>
       </div>
+
       <h2 style={{ margin: "20px" }}>Leads</h2>
       <div className="table-card">
         <table>
@@ -240,7 +264,8 @@ export default function LeadReports() {
           </thead>
 
           <tbody>
-            {leads.map((l) => (
+            {/* {leads.map((l) => ( */}
+            {currentLeads.map((l) => (
               <tr key={l._id}>
                 <td>{l.name}</td>
                 <td>{l.mobile}</td>
@@ -250,6 +275,34 @@ export default function LeadReports() {
             ))}
           </tbody>
         </table>
+        <div className="pagination">
+          {/* PREV BUTTON */}
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            Prev
+          </button>
+
+          {/* PAGE NUMBERS */}
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              className={currentPage === i + 1 ? "active-page" : ""}
+              onClick={() => setCurrentPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          {/* NEXT BUTTON */}
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

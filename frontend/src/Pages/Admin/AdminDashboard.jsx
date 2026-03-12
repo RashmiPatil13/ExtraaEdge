@@ -324,6 +324,8 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [leadFilter, setLeadFilter] = useState("all");
+
   const [stats, setStats] = useState({
     totalLeads: 0,
     totalManagers: 0,
@@ -435,11 +437,18 @@ export default function AdminDashboard() {
         <div className="page-content">
           {/* {activePage === "dashboard" && <Dashboard />} */}
           {activePage === "dashboard" && (
-            <Dashboard stats={stats} chartData={chartData} />
+            <Dashboard
+              stats={stats}
+              chartData={chartData}
+              setActivePage={setActivePage}
+              setLeadFilter={setLeadFilter}
+            />
           )}
           {activePage === "managers" && <ManageManagers />}
           {activePage === "telecallers" && <ManageTelecallers />}
-          {activePage === "leadReports" && <LeadReports />}
+          {/* {activePage === "leadReports" && <LeadReports />} */}
+          {/* {activePage === "leadReports" && <LeadReports />} */}
+          {activePage === "leadReports" && <LeadReports filter={leadFilter} />}
           {activePage === "settings" && <Settings />}
         </div>
       </div>
@@ -473,11 +482,81 @@ export default function AdminDashboard() {
 
 /* DASHBOARD */
 
-function Dashboard({ stats, chartData }) {
+// function Dashboard({ stats, chartData }) {
+//   return (
+//     <>
+//       <div className="dashboard-cards">
+//         <div className="card">
+//           <div className="icon orange">
+//             <FaUsers />
+//           </div>
+//           <h4>Total Leads</h4>
+//           <h2>{stats.totalLeads}</h2>
+//         </div>
+
+//         <div className="card">
+//           <div className="icon blue">
+//             <FaUserTie />
+//           </div>
+//           <h4>Managers</h4>
+//           <h2>{stats.totalManagers}</h2>
+//         </div>
+
+//         <div className="card">
+//           <div className="icon green">
+//             <FaPhoneAlt />
+//           </div>
+//           <h4>Telecallers</h4>
+//           <h2>{stats.totalTelecallers}</h2>
+//         </div>
+
+//         <div className="card">
+//           <div className="icon purple">
+//             <FaCheckCircle />
+//           </div>
+//           <h4>Conversions</h4>
+//           <h2>{stats.totalConversions}</h2>
+//         </div>
+//       </div>
+
+//       {/* GRAPH */}
+//       <div className="chart-card">
+//         <h3>Date Wise Leads Analytics</h3>
+
+//         <ResponsiveContainer width="100%" height={300}>
+//           <LineChart data={chartData}>
+//             <XAxis dataKey="date" />
+//             <YAxis />
+//             <Tooltip />
+//             <Line
+//               type="monotone"
+//               dataKey="leads"
+//               stroke="#6366f1"
+//               strokeWidth={3}
+//             />
+//           </LineChart>
+//         </ResponsiveContainer>
+//       </div>
+//     </>
+//   );
+// }
+
+// function Dashboard({ stats, chartData, setActivePage }) {
+//   return (
+function Dashboard({ stats, chartData, setActivePage, setLeadFilter }) {
   return (
     <>
+      {/* TOTAL LEADS */}
+
       <div className="dashboard-cards">
-        <div className="card">
+        {/* TOTAL LEADS */}
+        <div
+          className="card"
+          onClick={() => {
+            setLeadFilter("all");
+            setActivePage("leadReports");
+          }}
+        >
           <div className="icon orange">
             <FaUsers />
           </div>
@@ -485,7 +564,8 @@ function Dashboard({ stats, chartData }) {
           <h2>{stats.totalLeads}</h2>
         </div>
 
-        <div className="card">
+        {/* MANAGERS */}
+        <div className="card" onClick={() => setActivePage("managers")}>
           <div className="icon blue">
             <FaUserTie />
           </div>
@@ -493,7 +573,8 @@ function Dashboard({ stats, chartData }) {
           <h2>{stats.totalManagers}</h2>
         </div>
 
-        <div className="card">
+        {/* TELECALLERS */}
+        <div className="card" onClick={() => setActivePage("telecallers")}>
           <div className="icon green">
             <FaPhoneAlt />
           </div>
@@ -501,7 +582,14 @@ function Dashboard({ stats, chartData }) {
           <h2>{stats.totalTelecallers}</h2>
         </div>
 
-        <div className="card">
+        {/* CONVERSIONS */}
+        <div
+          className="card"
+          onClick={() => {
+            setLeadFilter("converted");
+            setActivePage("leadReports");
+          }}
+        >
           <div className="icon purple">
             <FaCheckCircle />
           </div>
@@ -531,63 +619,6 @@ function Dashboard({ stats, chartData }) {
     </>
   );
 }
-// *******card **********
-// function Dashboard({ stats, chartData }) {
-//   <div className="dashboard-cards">
-//     <div className="card">
-//       <div className="icon orange">
-//         <FaUsers />
-//       </div>
-//       <h4>Total Leads</h4>
-//       <h2>{stats.totalLeads}</h2>
-//     </div>
-
-//     <div className="card">
-//       <div className="icon blue">
-//         <FaUserTie />
-//       </div>
-//       <h4>Managers</h4>
-//       <h2>{stats.totalManagers}</h2>
-//     </div>
-
-//     <div className="card">
-//       <div className="icon green">
-//         <FaPhoneAlt />
-//       </div>
-//       <h4>Telecallers</h4>
-//       <h2>{stats.totalTelecallers}</h2>
-//     </div>
-
-//     <div className="card">
-//       <div className="icon purple">
-//         <FaCheckCircle />
-//       </div>
-//       <h4>Conversions</h4>
-//       <h2>{stats.totalConversions}</h2>
-//     </div>
-//   </div>;
-
-//   {
-//     /* GRAPH */
-//   }
-//   <div className="chart-card">
-//     <h3>Date Wise Leads Analytics</h3>
-
-//     <ResponsiveContainer width="100%" height={300}>
-//       <LineChart data={chartData}>
-//         <XAxis dataKey="date" />
-//         <YAxis />
-//         <Tooltip />
-//         <Line
-//           type="monotone"
-//           dataKey="leads"
-//           stroke="#6366f1"
-//           strokeWidth={3}
-//         />
-//       </LineChart>
-//     </ResponsiveContainer>
-//   </div>;
-// }
 
 /* MANAGE MANAGERS */
 

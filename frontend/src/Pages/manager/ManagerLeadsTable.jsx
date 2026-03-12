@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "../utils/api";
 
 export default function ManagerLeadsTable({ leads, setLeads }) {
   const [search, setSearch] = useState("");
   const [editData, setEditData] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const leadsPerPage = 10;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const filteredLeads = leads.filter(
     (lead) =>
@@ -11,7 +18,14 @@ export default function ManagerLeadsTable({ leads, setLeads }) {
       lead.mobile?.includes(search) ||
       lead.email?.toLowerCase().includes(search.toLowerCase())
   );
+  const indexOfLastLead = currentPage * leadsPerPage;
+  const indexOfFirstLead = indexOfLastLead - leadsPerPage;
+  const currentLeads = filteredLeads.slice(indexOfFirstLead, indexOfLastLead);
 
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredLeads.length / leadsPerPage)
+  );
   const deleteLead = async (id) => {
     await api.delete(`/manager/lead/${id}`);
 
@@ -59,7 +73,8 @@ export default function ManagerLeadsTable({ leads, setLeads }) {
         </thead>
 
         <tbody>
-          {filteredLeads.map((lead) => (
+          {/* {filteredLeads.map((lead) => ( */}
+          {currentLeads.map((lead) => (
             <tr key={lead._id}>
               <td>{lead.name}</td>
               <td>{lead.mobile}</td>
@@ -87,6 +102,31 @@ export default function ManagerLeadsTable({ leads, setLeads }) {
           ))}
         </tbody>
       </table>
+      <div className="pagination">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
+          Prev
+        </button>
+
+        {[...Array(totalPages)].map((_, i) => (
+          <button
+            key={i}
+            className={currentPage === i + 1 ? "active-page" : ""}
+            onClick={() => setCurrentPage(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          Next
+        </button>
+      </div>
       {editData && (
         <div className="modal-overlay">
           <div className="edit-modal">
