@@ -80,81 +80,83 @@ export default function MyLeads() {
 
         <button onClick={() => setStatusFilter("cold")}>Cold</button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Status</th>
-            <th>Remarks</th>
-            <th>Follow Up</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {leads.map((lead) => (
-            <tr key={lead._id}>
-              <td>{lead.name}</td>
-              <td>{lead.mobile}</td>
-
-              <td>
-                <select id={`status-${lead._id}`} defaultValue={lead.status}>
-                  <option value="pending">Pending</option>
-                  <option value="followup">Follow Up</option>
-                  <option value="callback">Callback</option>
-                  <option value="converted">Converted</option>
-                  <option value="cold">Cold</option>
-                </select>
-              </td>
-
-              {/* <input id={`remarks-${lead._id}`} defaultValue={lead.remarks} /> */}
-              <td style={{ width: "220px" }}>
-                <Select
-                  options={remarkOptions}
-                  value={remarkOptions.find(
-                    (opt) => opt.value === lead.remarks
-                  )}
-                  onChange={(selected) =>
-                    handleChange(lead._id, "remarks", selected.value)
-                  }
-                  isSearchable
-                  placeholder="Select remark"
-                />
-              </td>
-
-              <td>
-                <input type="date" id={`date-${lead._id}`} />
-              </td>
-
-              <td>
-                <button
-                  onClick={() =>
-                    updateLead(
-                      lead._id,
-                      document.getElementById(`status-${lead._id}`).value,
-                      // document.getElementById(`remarks-${lead._id}`).value,
-                      lead.remarks,
-                      document.getElementById(`date-${lead._id}`).value
-                    )
-                  }
-                  style={{
-                    background: " hsl(25, 100%, 90%)",
-
-                    fontWeight: "600",
-                    color: "#ff6b00",
-                    border: "none",
-                    padding: "5px 10px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Update
-                </button>
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Status</th>
+              <th>Remarks</th>
+              <th>Follow Up</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {leads.map((lead) => (
+              <tr key={lead._id}>
+                <td>{lead.name}</td>
+                <td>{lead.mobile}</td>
+
+                <td>
+                  <select id={`status-${lead._id}`} defaultValue={lead.status}>
+                    <option value="pending">Pending</option>
+                    <option value="followup">Follow Up</option>
+                    <option value="callback">Callback</option>
+                    <option value="converted">Converted</option>
+                    <option value="cold">Cold</option>
+                  </select>
+                </td>
+
+                {/* <input id={`remarks-${lead._id}`} defaultValue={lead.remarks} /> */}
+                <td style={{ width: "220px" }}>
+                  <Select
+                    options={remarkOptions}
+                    value={remarkOptions.find(
+                      (opt) => opt.value === lead.remarks
+                    )}
+                    onChange={(selected) =>
+                      handleChange(lead._id, "remarks", selected.value)
+                    }
+                    isSearchable
+                    placeholder="Select remark"
+                  />
+                </td>
+
+                <td>
+                  <input type="date" id={`date-${lead._id}`} />
+                </td>
+
+                <td>
+                  <button
+                    onClick={() =>
+                      updateLead(
+                        lead._id,
+                        document.getElementById(`status-${lead._id}`).value,
+                        // document.getElementById(`remarks-${lead._id}`).value,
+                        lead.remarks,
+                        document.getElementById(`date-${lead._id}`).value
+                      )
+                    }
+                    style={{
+                      background: " hsl(25, 100%, 90%)",
+
+                      fontWeight: "600",
+                      color: "#ff6b00",
+                      border: "none",
+                      padding: "5px 10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Update
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

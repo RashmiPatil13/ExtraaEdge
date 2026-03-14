@@ -46,6 +46,7 @@ import { useEffect, useState } from "react";
 import api from "../utils/api";
 
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
+import { ResponsiveContainer } from "recharts";
 
 export default function TelecallerChart() {
   const [data, setData] = useState([]);

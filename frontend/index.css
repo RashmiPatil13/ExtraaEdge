@@ -1,10 +1,24 @@
-html,
-body,
-#root {
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
+  box-sizing: border-box;
+}
+
+html,
+body {
   width: 100%;
+  overflow-x: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
 }
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

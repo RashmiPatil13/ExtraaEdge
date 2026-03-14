@@ -857,51 +857,52 @@ function ManageTelecallers() {
   return (
     <div>
       <h2 style={{ margin: "20px" }}>Manage Telecallers</h2>
+      <div className="table-container">
+        <div className="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-      <div className="table-card">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {telecallers.map((t) => (
-              <tr key={t._id}>
-                <td>{t.name}</td>
-                <td>{t.email}</td>
-                <td>{t.isApproved ? "Approved" : "Pending"}</td>
-                <td className="actions">
-                  {/* {!t.isApproved && (
+            <tbody>
+              {telecallers.map((t) => (
+                <tr key={t._id}>
+                  <td>{t.name}</td>
+                  <td>{t.email}</td>
+                  <td>{t.isApproved ? "Approved" : "Pending"}</td>
+                  <td className="actions">
+                    {/* {!t.isApproved && (
                     <button onClick={() => approveUser(t._id)}>Approve</button>
                   )}
                   <button onClick={() => deleteUser(t._id)}>Delete</button> */}
-                  <td className="actions">
-                    <button
-                      className={`toggle-btn ${
-                        t.isApproved ? "approved" : "pending"
-                      }`}
-                      onClick={() => toggleApproval(t._id)}
-                    >
-                      {t.isApproved ? "Disapprove" : "Approve"}
-                    </button>
+                    <td className="actions">
+                      <button
+                        className={`toggle-btn ${
+                          t.isApproved ? "approved" : "pending"
+                        }`}
+                        onClick={() => toggleApproval(t._id)}
+                      >
+                        {t.isApproved ? "Disapprove" : "Approve"}
+                      </button>
 
-                    <button
-                      className="delete-btn"
-                      onClick={() => deleteUser(t._id)}
-                    >
-                      Delete
-                    </button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => deleteUser(t._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </td>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

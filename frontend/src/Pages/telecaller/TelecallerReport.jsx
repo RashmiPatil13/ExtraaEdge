@@ -15,26 +15,27 @@ export default function TelecallerReport() {
   return (
     <div>
       <h2>Daily Report</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Remarks</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {report.map((r) => (
-            <tr key={r._id}>
-              <td>{r.name}</td>
-              <td>{r.status}</td>
-              <td>{r.remarks}</td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Remarks</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {report.map((r) => (
+              <tr key={r._id}>
+                <td>{r.name}</td>
+                <td>{r.status}</td>
+                <td>{r.remarks}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

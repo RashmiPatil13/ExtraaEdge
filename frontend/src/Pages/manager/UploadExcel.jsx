@@ -56,28 +56,6 @@ export default function UploadExcel() {
     setFile(null);
   };
 
-  // return (
-  //   <div className="upload-container">
-  //     <h2 className="upload-title">Upload Leads (Excel)</h2>
-
-  //     <label className="file-box">
-  //       <input
-  //         type="file"
-  //         accept=".xlsx,.xls"
-  //         onChange={(e) => setFile(e.target.files[0])}
-  //       />
-  //       <span>{file ? file.name : "Choose Excel File"}</span>
-  //     </label>
-
-  //     <button className="upload-btn" onClick={upload}>
-  //       Upload
-  //     </button>
-
-  //     <p className="upload-info">
-  //       Columns: <b>Name, Mobile, Course, Source</b>
-  //     </p>
-  //   </div>
-  // );
   return (
     <div className="upload-page">
       <div className="upload-container">

@@ -95,30 +95,31 @@ export default function TelecallerRecords() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Total Leads</th>
-            <th>Converted</th>
-            <th>Pending</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filtered.map((r, i) => (
-            <tr key={i}>
-              <td>{r.name}</td>
-              <td>{r.email}</td>
-              <td>{r.total}</td>
-              <td>{r.converted}</td>
-              <td>{r.pending}</td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Total Leads</th>
+              <th>Converted</th>
+              <th>Pending</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {filtered.map((r, i) => (
+              <tr key={i}>
+                <td>{r.name}</td>
+                <td>{r.email}</td>
+                <td>{r.total}</td>
+                <td>{r.converted}</td>
+                <td>{r.pending}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

@@ -66,29 +66,6 @@ export default function Dashboard({ setActivePage, setStatus }) {
 
   return (
     <div className="cards">
-      {/* <div className="card">
-        <div className="icon orange">
-          <FaUsers />
-        </div>
-        <p>Total Leads</p>
-        <h2>{stats.total}</h2>
-      </div>
-
-      <div className="card">
-        <div className="icon blue">
-          <FaTasks />
-        </div>
-        <p>Assigned Leads</p>
-        <h2>{stats.assigned}</h2>
-      </div>
-
-      <div className="card">
-        <div className="icon green">
-          <FaCheckCircle />
-        </div>
-        <p>Converted Leads</p>
-        <h2>{stats.converted}</h2>
-      </div> */}
       <div
         className="card"
         onClick={() => {

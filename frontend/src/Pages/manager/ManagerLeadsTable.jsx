@@ -57,51 +57,54 @@ export default function ManagerLeadsTable({ leads, setLeads }) {
         onChange={(e) => setSearch(e.target.value)}
         style={{ marginBottom: "10px", padding: "8px", width: "300px" }}
       />
+      <div className="table-container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              {/* <th>Email</th> */}
+              <th>Status</th>
+              <th>Remarks</th>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            {/* <th>Email</th> */}
-            <th>Status</th>
-            <th>Remarks</th>
-
-            <th>Assigned</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {/* {filteredLeads.map((lead) => ( */}
-          {currentLeads.map((lead) => (
-            <tr key={lead._id}>
-              <td>{lead.name}</td>
-              <td>{lead.mobile}</td>
-              {/* <td>{lead.email}</td> */}
-              <td>{lead.status}</td>
-              <td>{lead.remarks}</td>
-              <td>{lead.assignedTo ? lead.assignedTo.name : "Not Assigned"}</td>
-
-              <td>
-                <button
-                  onClick={() => editLead(lead)}
-                  className="btn btn-success"
-                >
-                  Edit
-                </button>
-
-                <button
-                  onClick={() => deleteLead(lead._id)}
-                  className="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </td>
+              <th>Assigned</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {/* {filteredLeads.map((lead) => ( */}
+            {currentLeads.map((lead) => (
+              <tr key={lead._id}>
+                <td>{lead.name}</td>
+                <td>{lead.mobile}</td>
+                {/* <td>{lead.email}</td> */}
+                <td>{lead.status}</td>
+                <td>{lead.remarks}</td>
+                <td>
+                  {lead.assignedTo ? lead.assignedTo.name : "Not Assigned"}
+                </td>
+
+                <td>
+                  <button
+                    onClick={() => editLead(lead)}
+                    className="btn btn-success"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() => deleteLead(lead._id)}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className="pagination">
         <button
           disabled={currentPage === 1}

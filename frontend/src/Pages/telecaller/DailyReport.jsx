@@ -105,44 +105,45 @@ export default function DailyReport() {
           Export
         </button>
       </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Remarks</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data.map((d) => (
-            <tr key={d._id}>
-              <td>{d.name}</td>
-              <td>{d.status}</td>
-              <td>{d.remarks || "-"}</td>
-
-              <td>
-                <button
-                  onClick={() => handleDelete(d._id)}
-                  style={{
-                    background: " hsl(25, 100%, 90%)",
-
-                    fontWeight: "600",
-                    color: "#ff6b00",
-                    border: "none",
-                    padding: "5px 10px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Delete
-                </button>
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Remarks</th>
+              <th>Delete</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {data.map((d) => (
+              <tr key={d._id}>
+                <td>{d.name}</td>
+                <td>{d.status}</td>
+                <td>{d.remarks || "-"}</td>
+
+                <td>
+                  <button
+                    onClick={() => handleDelete(d._id)}
+                    style={{
+                      background: " hsl(25, 100%, 90%)",
+
+                      fontWeight: "600",
+                      color: "#ff6b00",
+                      border: "none",
+                      padding: "5px 10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

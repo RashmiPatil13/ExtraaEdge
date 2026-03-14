@@ -82,46 +82,48 @@ export default function AssignLeads() {
         ))}
       </select>
       {/* Leads Table */}
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <label style={{ gap: "2px" }}>
-                <input
-                  type="checkbox"
-                  onChange={handleSelectAll}
-                  checked={
-                    selectedLeads.length === leads.length && leads.length > 0
-                  }
-                />
-                Select All
-              </label>
-            </th>
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Course</th>
-            <th>Source</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {leads.map((lead) => (
-            <tr key={lead._id}>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selectedLeads.includes(lead._id)}
-                  onChange={() => toggleLead(lead._id)}
-                />
-              </td>
-              <td>{lead.name}</td>
-              <td>{lead.mobile}</td>
-              <td>{lead.course}</td>
-              <td>{lead.source}</td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <label style={{ gap: "2px" }}>
+                  <input
+                    type="checkbox"
+                    onChange={handleSelectAll}
+                    checked={
+                      selectedLeads.length === leads.length && leads.length > 0
+                    }
+                  />
+                  Select All
+                </label>
+              </th>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Course</th>
+              <th>Source</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {leads.map((lead) => (
+              <tr key={lead._id}>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedLeads.includes(lead._id)}
+                    onChange={() => toggleLead(lead._id)}
+                  />
+                </td>
+                <td>{lead.name}</td>
+                <td>{lead.mobile}</td>
+                <td>{lead.course}</td>
+                <td>{lead.source}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <button className="assign-btn" onClick={assignLeads}>
         Assign Selected Leads
       </button>

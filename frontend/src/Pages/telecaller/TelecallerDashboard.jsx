@@ -71,36 +71,66 @@ const TelecallerDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className={`sidebar ${menuOpen ? "open" : ""}`}>
+      {/* <div className={`sidebar ${menuOpen ? "open" : ""}`}> */}
+      <div className={`sidebar ${menuOpen ? "active" : ""}`}>
         <h2>ExtraaEdge CRM</h2>
 
         <ul>
-          <li
+          {/* <li
             className={activePage === "dashboard" ? "active" : ""}
             onClick={() => setActivePage("dashboard")}
           >
             Dashboard
+          </li> */}
+          <li
+            className={activePage === "dashboard" ? "active" : ""}
+            onClick={() => {
+              setActivePage("dashboard");
+              setMenuOpen(false);
+            }}
+          >
+            Dashboard
           </li>
 
-          <li
+          {/* <li
             className={activePage === "leads" ? "active" : ""}
             onClick={() => setActivePage("leads")}
           >
             My Leads
+          </li> */}
+          <li
+            className={activePage === "leads" ? "active" : ""}
+            onClick={() => {
+              setActivePage("leads");
+              setMenuOpen(false);
+            }}
+          >
+            My Leads
           </li>
 
-          <li
+          {/* <li
             className={activePage === "report" ? "active" : ""}
             onClick={() => setActivePage("report")}
+          >
+            Daily Report
+          </li> */}
+          <li
+            className={activePage === "report" ? "active" : ""}
+            onClick={() => {
+              setActivePage("report");
+              setMenuOpen(false);
+            }}
           >
             Daily Report
           </li>
           <li
             className={activePage === "setting" ? "active" : ""}
-            onClick={() => setActivePage("setting")}
+            onClick={() => {
+              setActivePage("setting");
+              setMenuOpen(false);
+            }}
           >
             Settings
-            {/* {unreadCount > 0 && <span className="badge">{unreadCount}</span>} */}
           </li>
         </ul>
 
@@ -108,6 +138,9 @@ const TelecallerDashboard = () => {
           Logout
         </button>
       </div>
+      {menuOpen && (
+        <div className="overlay" onClick={() => setMenuOpen(false)}></div>
+      )}
 
       {/* <div className="main-content"> */}
       <div

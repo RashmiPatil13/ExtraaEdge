@@ -252,29 +252,31 @@ export default function LeadReports({ filter }) {
       </div>
 
       <h2 style={{ margin: "20px" }}>Leads</h2>
-      <div className="table-card">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Mobile</th>
-              <th>Status</th>
-              <th>Assigned To</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {/* {leads.map((l) => ( */}
-            {currentLeads.map((l) => (
-              <tr key={l._id}>
-                <td>{l.name}</td>
-                <td>{l.mobile}</td>
-                <td>{l.status}</td>
-                <td>{l.assignedTo?.name || "Unassigned"}</td>
+      <div className="table-container">
+        <div className="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Status</th>
+                <th>Assigned To</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {/* {leads.map((l) => ( */}
+              {currentLeads.map((l) => (
+                <tr key={l._id}>
+                  <td>{l.name}</td>
+                  <td>{l.mobile}</td>
+                  <td>{l.status}</td>
+                  <td>{l.assignedTo?.name || "Unassigned"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <div className="pagination">
           {/* PREV BUTTON */}
           <button
