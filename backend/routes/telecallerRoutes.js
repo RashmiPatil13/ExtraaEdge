@@ -5,14 +5,7 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 /* GET ASSIGNED LEADS FOR TELECALLER */
-// router.get("/my-leads", authMiddleware(["telecaller"]), async (req, res) => {
-//   try {
-//     const leads = await Lead.find({ assignedTo: req.user.id });
-//     res.json(leads);
-//   } catch (err) {
-//     res.status(500).json({ msg: "Error fetching leads" });
-//   }
-// });
+
 router.get("/my-leads", authMiddleware(["telecaller"]), async (req, res) => {
   try {
     const { status } = req.query;
@@ -31,48 +24,6 @@ router.get("/my-leads", authMiddleware(["telecaller"]), async (req, res) => {
   }
 });
 
-/* UPDATE LEAD STATUS + REMARKS + FOLLOWUP DATE */
-// router.put(
-//   "/update-lead/:id",
-//   authMiddleware(["telecaller"]),
-//   async (req, res) => {
-//     try {
-//       const { status, remarks, followUpDate } = req.body;
-
-//       const lead = await Lead.findById(req.params.id);
-
-//       lead.status = status;
-//       lead.remarks = remarks;
-//       lead.followUpDate = followUpDate;
-
-//       lead.activities.push({
-//         action: `Status changed to ${status}`,
-//         remarks,
-//       });
-
-//       await lead.save();
-
-//       res.json({ msg: "Lead updated successfully" });
-//     } catch (err) {
-//       res.status(500).json({ msg: "Update failed" });
-//     }
-//   }
-// );
-// router.put("/lead/:id", authMiddleware(["telecaller"]), async (req, res) => {
-//   try {
-//     const { status, remarks } = req.body;
-
-//     await Lead.findByIdAndUpdate(req.params.id, {
-//       status,
-//       remarks,
-//       updatedAt: new Date(),
-//     });
-
-//     res.json({ msg: "Lead updated successfully" });
-//   } catch (err) {
-//     res.status(500).json({ msg: "Update failed" });
-//   }
-// });
 router.put("/lead/:id", authMiddleware(["telecaller"]), async (req, res) => {
   try {
     const { status, remarks, followUpDate } = req.body;
@@ -99,25 +50,6 @@ router.put("/lead/:id", authMiddleware(["telecaller"]), async (req, res) => {
   }
 });
 
-// router.get(
-//   "/daily-report",
-//   authMiddleware(["telecaller"]),
-//   async (req, res) => {
-//     try {
-//       const today = new Date();
-//       today.setHours(0, 0, 0, 0);
-
-//       const leads = await Lead.find({
-//         assignedTo: req.user.id,
-//         updatedAt: { $gte: today },
-//       });
-
-//       res.json(leads);
-//     } catch (err) {
-//       res.status(500).json({ msg: "Error fetching daily report" });
-//     }
-//   }
-// );
 router.get(
   "/daily-report",
   authMiddleware(["telecaller"]),
@@ -221,65 +153,3 @@ router.delete("/lead/:id", authMiddleware(["telecaller"]), async (req, res) => {
 });
 
 export default router;
-
-// import express from "express";
-// import Lead from "../models/Lead.js";
-// import { authMiddleware } from "../middleware/authMiddleware.js";
-
-// const router = express.Router();
-
-// // GET LEADS ASSIGNED TO TELECALLER
-// router.get("/leads", authMiddleware(["telecaller"]), async (req, res) => {
-//   const leads = await Lead.find({ assignedTo: req.user.id });
-//   res.json(leads);
-// });
-
-// // UPDATE LEAD STATUS
-// router.put("/lead/:id", authMiddleware(["telecaller"]), async (req, res) => {
-//   const { status, remarks } = req.body;
-
-//   await Lead.findByIdAndUpdate(req.params.id, {
-//     status,
-//     remarks,
-//   });
-
-//   res.json({ message: "Lead updated" });
-// });
-
-// // 👇👇 ADD THIS NEW API FOR STATS
-
-// router.get("/stats", authMiddleware(["telecaller"]), async (req, res) => {
-//   const userId = req.user.id;
-
-//   const total = await Lead.countDocuments({ assignedTo: userId });
-
-//   const followup = await Lead.countDocuments({
-//     assignedTo: userId,
-//     status: "followup",
-//   });
-
-//   const callback = await Lead.countDocuments({
-//     assignedTo: userId,
-//     status: "callback",
-//   });
-
-//   const converted = await Lead.countDocuments({
-//     assignedTo: userId,
-//     status: "converted",
-//   });
-
-//   const cold = await Lead.countDocuments({
-//     assignedTo: userId,
-//     status: "cold",
-//   });
-
-//   res.json({
-//     total,
-//     followup,
-//     callback,
-//     converted,
-//     cold,
-//   });
-// });
-
-// export default router;

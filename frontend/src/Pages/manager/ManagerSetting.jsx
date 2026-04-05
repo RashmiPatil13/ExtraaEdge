@@ -118,9 +118,3 @@ export default function ManagerSetting() {
     </div>
   );
 }
-// {notifications.map((n)=>(
-//     <div className="notification">
-//     <p>{n.message}</p>
-//     <span>{new Date(n.createdAt).toLocaleString()}</span>
-//     </div>
-//     ))}

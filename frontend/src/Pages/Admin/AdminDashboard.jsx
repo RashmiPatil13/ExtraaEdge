@@ -482,65 +482,6 @@ export default function AdminDashboard() {
 
 /* DASHBOARD */
 
-// function Dashboard({ stats, chartData }) {
-//   return (
-//     <>
-//       <div className="dashboard-cards">
-//         <div className="card">
-//           <div className="icon orange">
-//             <FaUsers />
-//           </div>
-//           <h4>Total Leads</h4>
-//           <h2>{stats.totalLeads}</h2>
-//         </div>
-
-//         <div className="card">
-//           <div className="icon blue">
-//             <FaUserTie />
-//           </div>
-//           <h4>Managers</h4>
-//           <h2>{stats.totalManagers}</h2>
-//         </div>
-
-//         <div className="card">
-//           <div className="icon green">
-//             <FaPhoneAlt />
-//           </div>
-//           <h4>Telecallers</h4>
-//           <h2>{stats.totalTelecallers}</h2>
-//         </div>
-
-//         <div className="card">
-//           <div className="icon purple">
-//             <FaCheckCircle />
-//           </div>
-//           <h4>Conversions</h4>
-//           <h2>{stats.totalConversions}</h2>
-//         </div>
-//       </div>
-
-//       {/* GRAPH */}
-//       <div className="chart-card">
-//         <h3>Date Wise Leads Analytics</h3>
-
-//         <ResponsiveContainer width="100%" height={300}>
-//           <LineChart data={chartData}>
-//             <XAxis dataKey="date" />
-//             <YAxis />
-//             <Tooltip />
-//             <Line
-//               type="monotone"
-//               dataKey="leads"
-//               stroke="#6366f1"
-//               strokeWidth={3}
-//             />
-//           </LineChart>
-//         </ResponsiveContainer>
-//       </div>
-//     </>
-//   );
-// }
-
 // function Dashboard({ stats, chartData, setActivePage }) {
 //   return (
 function Dashboard({ stats, chartData, setActivePage, setLeadFilter }) {
